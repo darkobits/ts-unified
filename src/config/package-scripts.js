@@ -16,7 +16,7 @@ const {
  * name unmodified. Otherwise, prepends the bin prefix used by this package to
  * ensure that consumers reference our binaries.
  */
-function prefixBin(binName) {
+function prefixBin (binName) {
   const binPrefix = 'unified';
 
   if (module.parent.id === path.resolve(__dirname, '..', '..', 'package-scripts.js')) {
@@ -86,7 +86,7 @@ const bump = {
 
 const prepare = {
   description: 'Runs after "npm install" to ensure the package compiles correctly.',
-  script: npsUtils.series(build.default.script, test.default.script)
+  script: npsUtils.series(build.default.script, `${test.default.script} --passWithNoTests`)
 };
 
 
