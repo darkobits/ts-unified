@@ -4,6 +4,10 @@
   "author": "darkobits",
   "license": "WTFPL",
   "description": "TypeScript boilerplate.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darkobits/ts-unified"
+  },
   "files": [
     "dist"
   ],
@@ -45,6 +49,7 @@
     "resolve-pkg": "^1.0.0",
     "standard-version": "^5.0.0",
     "tslint": "^5.13.0",
+    "tslint-eslint-rules": "^5.4.0",
     "tslint-xo": "~0.15.0",
     "typescript": "^3.3.3333"
   },
