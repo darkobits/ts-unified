@@ -10,7 +10,18 @@
     "array-type": {
 			"severity": "error",
 			"options": ["generic"]
-		},
+    },
+
+    "ban-types": {
+      "severity": "error",
+      "options": [
+        ["String", "Use `string` instead."],
+			  ["Number", "Use `number` instead."],
+			  ["Boolean", "Use `boolean` instead."],
+			  ["Symbol", "Use `symbol` instead."],
+			  ["Object", "Use `object` instead."]
+      ]
+    },
 
     // Require a space after "//" on single-line comments.
     "comment-format": {
@@ -60,7 +71,7 @@
       "severity": "off"
     },
 
-    // Allows "unsafe" use of the 'any' type. (This rule tends to be a bit
+    // Allows "unsafe" use of the "any" type. (This rule tends to be a bit
     // over-zealous.)
     "no-unsafe-any": {
       "severity": "off"
