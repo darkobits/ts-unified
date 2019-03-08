@@ -23,7 +23,7 @@ const jestConfig = {
     '!**/node_modules/**',
   ],
   coveragePathIgnorePatterns: ALWAYS_IGNORE,
-  moduleFileExtensions: EXTENSIONS,
+  moduleFileExtensions: [...EXTENSIONS, 'json'],
   coverageThreshold: {
     global: {
       statements: 100,
