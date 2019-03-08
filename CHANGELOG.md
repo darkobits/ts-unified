@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.2.0](https://github.com/darkobits/ts-unified/compare/v1.1.5...v1.2.0) (2019-03-08)
+
+
+### Bug Fixes
+
+* Add "json" to extensions list for Jest configuration. ([a98fd8a](https://github.com/darkobits/ts-unified/commit/a98fd8a))
+
+
+### Features
+
+* Add script "nps check-deps" to check for outdated dependencies. ([28e3c3e](https://github.com/darkobits/ts-unified/commit/28e3c3e))
+
+
+
 ## [1.1.5](https://github.com/darkobits/ts-unified/compare/v1.1.4...v1.1.5) (2019-02-26)
 
 
