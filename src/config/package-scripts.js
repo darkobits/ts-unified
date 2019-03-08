@@ -84,6 +84,11 @@ const bump = {
   }
 };
 
+const checkDeps = {
+  description: 'Check for newer versions of installed dependencies.',
+  script: 'npm-check --skip-unused'
+};
+
 const prepare = {
   description: 'Runs after "npm install" to ensure the package compiles correctly.',
   script: npsUtils.series(build.default.script, `${test.default.script} --passWithNoTests`)
@@ -98,6 +103,7 @@ module.exports = (userScripts = {}) => {
       test,
       build,
       bump,
+      checkDeps,
       prepare
     }
   }, userScripts);
