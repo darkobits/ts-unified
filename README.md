@@ -106,9 +106,9 @@ module.exports = require('@darkobits/ts-unified/dist/config/package-scripts')({
 });
 ```
 
-### TypeScript
+### TypeScript\\\
 
-In your project root, create `tsconfig.json`. Then, extend the TypeScript configuration from ts-unified, optionally providing your own configuration. It is recommended that you at least set `baseUrl, `ourDir`, and `paths`; these cannot be set by ts-unified because TypeScript computes them relative to the `tsconfig.json` file from which they were declared.
+In your project root, create `tsconfig.json`. Then, extend the TypeScript configuration from ts-unified, optionally providing your own configuration. It is recommended that you at least set `baseUrl`, `outDir`, and `paths`; these cannot be set by ts-unified because TypeScript computes them relative to the `tsconfig.json` file from which they were declared.
 
 > `tsconfig.json`
 
