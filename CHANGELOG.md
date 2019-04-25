@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.4.0](https://github.com/darkobits/ts-unified/compare/v1.3.0...v1.4.0) (2019-04-25)
+
+
+### Features
+
+* **NPS:** Add bump.first script for initial releases. ([98fb5d7](https://github.com/darkobits/ts-unified/commit/98fb5d7))
+
+
+
 # [1.3.0](https://github.com/darkobits/ts-unified/compare/v1.2.1...v1.3.0) (2019-04-09)
 
 
