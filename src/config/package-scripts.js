@@ -81,6 +81,10 @@ const bump = {
   beta: {
     description: 'Generates a change log and tagged commit for a beta release.',
     script: npsUtils.series(build.default.script, `${prefixBin('standard-version')} --prerelease=beta`)
+  },
+  first: {
+    description: 'Generates a change log and tagged commit for a project\'s first release.',
+    script: npsUtils.series(build.default.script, `${prefixBin('standard-version')} --first-release`)
   }
 };
 
