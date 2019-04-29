@@ -12,7 +12,7 @@ import log from 'lib/log';
  */
 export async function resolveBin(pkgName: string, binName?: string) {
   // Resolve the indicated package relative to this package.
-  const pkgPath = resolvePkg(pkgName, {cwd: __dirname as unknown as boolean});
+  const pkgPath = resolvePkg(pkgName, {cwd: __dirname});
 
   if (!pkgPath) {
     throw new Error(`[resolveBin] Unable to resolve path to package "${pkgName}".`);

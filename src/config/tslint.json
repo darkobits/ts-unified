@@ -12,6 +12,8 @@
 			"options": ["generic"]
     },
 
+    // This effectively allows the use of `Function` as a type, which would
+    // normally be banned.
     "ban-types": {
       "severity": "error",
       "options": [
@@ -29,6 +31,7 @@
 			"options": ["check-space"]
 		},
 
+    // Do not enforce the "early exit" pattern.
     "early-exit": {
       "severity": "off"
     },
@@ -83,13 +86,16 @@
 			"severity": "off"
 		},
 
-    // Don"t require typedefs; in most cases these can be trivially inferred.
+    // Don"t require explicit type definitions on everything. In many cases,
+    // TypeScript can "trivially infer" types and a type definition would be
+    // redundant.
     "typedef": {
       "severity": "off"
     },
 
-    // Allow variable names in lowerCamelCase, PascalCase, and UPPER_CASE.
-		// Additionally, ban the use of reserved TypeScript keywords.
+    // Allow variable names in lowerCamelCase, PascalCase, UPPER_CASE, and
+    // _leadingUnderscore. Additionally, ban the use of reserved TypeScript
+    // keywords.
 		"variable-name": {
 			"severity": "error",
 			"options": [
