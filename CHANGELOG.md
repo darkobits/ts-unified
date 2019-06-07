@@ -1,6 +1,15 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.6.0](https://github.com/darkobits/ts-unified/compare/v1.5.0...v1.6.0) (2019-06-07)
+
+
+### Features
+
+* Update dependencies. ([93d9aae](https://github.com/darkobits/ts-unified/commit/93d9aae))
+
+
 
 # [1.5.0](https://github.com/darkobits/ts-unified/compare/v1.4.0...v1.5.0) (2019-04-29)
 
