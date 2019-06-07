@@ -1,7 +1,6 @@
 require('@babel/register');
 
 const merge = require('deepmerge');
-const readPkgUp = require('read-pkg-up');
 const {EXTENSIONS, SRC_DIR, OUT_DIR} = require('../etc/constants');
 
 

@@ -21,7 +21,11 @@ export async function resolveBin(pkgName: string, binName?: string) {
   // Load the package.json for the indicated package.
   const pkgData = await readPkgUp({cwd: pkgPath});
 
-  if (!pkgData.pkg.bin) {
+  if (!pkgData) {
+    throw new Error('[resolveBin] Unable to find a package.json for the local project.');
+  }
+
+  if (!pkgData.package.bin) {
     throw new Error(`[resolveBin] Package "${pkgName}" does not declare any binaries.`);
   }
 
@@ -30,7 +34,7 @@ export async function resolveBin(pkgName: string, binName?: string) {
   const pkgRoot = path.parse(pkgData.path).dir;
 
   // Extract the relative path to the indicated binary.
-  const relativeBinPath = binName ? pkgData.pkg.bin[binName] : pkgData.pkg.bin[pkgName];
+  const relativeBinPath = binName ? pkgData.package.bin[binName] : pkgData.package.bin[pkgName];
 
   if (!relativeBinPath) {
     throw new Error(`[resolveBin] Package "${pkgName}" does not have binary "${binName}".`);
@@ -39,7 +43,7 @@ export async function resolveBin(pkgName: string, binName?: string) {
   // Return the absolute path to the indicated binary.
   return {
     path: path.resolve(pkgRoot, relativeBinPath),
-    version: pkgData.pkg.version
+    version: pkgData.package.version
   };
 }
 

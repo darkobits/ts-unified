@@ -23,7 +23,7 @@ function prefixBin (binName) {
     return binName;
   }
 
-  return `${binPrefix}-${binName}`;
+  return `${binPrefix}.${binName}`;
 }
 
 

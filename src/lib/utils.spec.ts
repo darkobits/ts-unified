@@ -26,7 +26,7 @@ jest.mock('read-pkg-up', () => {
   return jest.fn(async ({cwd}: {cwd: string}) => {
     if (cwd === '/path/to/pkg-with-named-bin') {
       return {
-        pkg: {
+        package: {
           bin: {
             'pkg-with-named-bin': '/path/to/pkg-with-named-bin/bin'
           }
@@ -37,7 +37,7 @@ jest.mock('read-pkg-up', () => {
 
     if (cwd === '/path/to/pkg-with-no-bin') {
       return {
-        pkg: {},
+        package: {},
         path: '/path/to/pkg-with-no-bin'
       };
     }
