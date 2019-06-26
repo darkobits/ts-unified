@@ -1,18 +1,22 @@
 /**
+ * Note: This file must be written in ES5 because is is used in other
+ * configuration files prior to transformers being loaded.
+ */
+
+/**
  * Directory where source files are located.
  */
-export const SRC_DIR = 'src';
+exports.SRC_DIR = 'src';
 
 
 /**
  * Directory where build artifacts will be created.
  */
-export const OUT_DIR = 'dist';
+exports.OUT_DIR = 'dist';
 
 
 /**
  * List of common file extensions we want tools to work with.
  */
-export const EXTENSIONS = ['ts', 'tsx', 'js', 'jsx', 'node'];
-
-export const EXTENSIONS_WITH_DOT = EXTENSIONS.map(ext => `.${ext}`);
+exports.EXTENSIONS = ['ts', 'tsx', 'js', 'jsx', 'node'];
+exports.EXTENSIONS_WITH_DOT = exports.EXTENSIONS.map(ext => `.${ext}`);

@@ -1,5 +1,3 @@
-require('@babel/register');
-
 const merge = require('deepmerge');
 const {EXTENSIONS, SRC_DIR, OUT_DIR} = require('../etc/constants');
 
@@ -29,6 +27,14 @@ const jestConfig = {
       branches: 95,
       functions: 100,
       lines: 100
+    }
+  },
+  transform: {
+    [`^.+\\.(${EXTENSIONS.join('|')})$`]: 'ts-jest'
+  },
+  globals: {
+    'ts-jest': {
+      compiler: 'ttypescript'
     }
   }
 };

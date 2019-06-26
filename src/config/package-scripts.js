@@ -1,14 +1,10 @@
-require('@babel/register');
+require('ts-node').register();
 
 const path = require('path');
 const merge = require('deepmerge');
 const npsUtils = require('nps-utils');
 
-const {
-  SRC_DIR,
-  OUT_DIR,
-  EXTENSIONS_WITH_DOT
-} = require('../etc/constants');
+const {SRC_DIR, OUT_DIR, EXTENSIONS_WITH_DOT} = require('../etc/constants');
 
 
 /**
@@ -54,20 +50,18 @@ const test = {
   }
 };
 
-const tsc = `${prefixBin('tsc')} --emitDeclarationOnly --pretty`;
-const babel = `${prefixBin('babel')} ${SRC_DIR} --extensions="${EXTENSIONS_WITH_DOT.join(',')}" --ignore="**/*.spec.*,**/*.d.ts" --out-dir="${OUT_DIR}" --copy-files --source-maps=true`;
+const ttsc = `${prefixBin('ttsc')} --pretty`;
 const postBuild = `${prefixBin('del')} ${OUT_DIR}/**/*.spec.*`;
 
 const build = {
   default: {
     description: 'Build the project.',
-    script: npsUtils.series(clean.script, lint.script, tsc, babel, postBuild)
+    script: npsUtils.series(clean.script, lint.script, ttsc, postBuild)
   },
   watch: {
     description: 'Continuously build the project',
     script: npsUtils.series(clean.script, npsUtils.concurrent({
-      tsc: `${tsc} --preserveWatchOutput --watch`,
-      babel: `${babel} --watch --verbose`
+      ttsc: `${ttsc} --preserveWatchOutput --watch`
     }))
   }
 };

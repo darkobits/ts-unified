@@ -16,7 +16,6 @@
   ],
   "bin": {
     "unified": "dist/bin/nps.js",
-    "unified.babel": "dist/bin/babel.js",
     "unified.del": "dist/bin/del.js",
     "unified.jest": "dist/bin/jest.js",
     "unified.standard-version": "dist/bin/standard-version.js",
@@ -31,17 +30,7 @@
     "help": "nps --scripts"
   },
   "dependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-typescript": "^7.3.3",
-    "@babel/register": "^7.4.4",
     "@darkobits/log": "^1.2.3",
-    "babel-jest": "^24.8.0",
-    "babel-merge": "^2.0.1",
-    "babel-plugin-module-resolver": "^3.2.0",
     "chalk": "^2.4.2",
     "deepmerge": "^3.3.0",
     "del-cli": "^2.0.0",
@@ -52,17 +41,17 @@
     "read-pkg-up": "^6.0.0",
     "resolve-pkg": "^2.0.0",
     "standard-version": "^6.0.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "ts-transformer-imports": "^0.4.3",
     "tscpaths": "0.0.9",
     "tslint": "^5.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-xo": "~0.16.0",
     "ttypescript": "^1.5.7",
-    "typescript": "^3.5.2",
-    "typescript-transform-paths": "^1.1.4"
+    "typescript": "^3.5.2"
   },
   "devDependencies": {
-    "@types/chalk": "^2.2.0",
-    "@types/deepmerge": "^2.2.0",
     "@types/jest": "^24.0.15",
     "@types/node": "^11.13.15"
   }

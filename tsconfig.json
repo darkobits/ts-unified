@@ -4,15 +4,17 @@
     // Base directory to resolve non-relative module names.
     "baseUrl": ".",
 
+    "rootDir": "src",
+
     // Redirect output structure to this directory.
     "outDir": "dist",
 
     // Specify path mapping to be computed relative to baseUrl option.
     "paths": {
-      "*": [
-        "*",
-        "src/*"
-      ]
-    }
+      "*": ["*", "src/*"]
+    },
+
+    // Skip type-checking of node_modules.
+    "skipLibCheck": true
   }
 }

@@ -6,6 +6,20 @@
       "es2015"
     ],
 
+    // Output code will be optimized for this language spec. ES1028 is fully
+    // supported in Node 10.
+    "target": "es2018",
+
+    // Generate output code that uses CommonJS (ie: require).
+    "module": "commonjs",
+
+    // Transform absolute imports in source files to relative imports so that
+    // output code works as expected.
+    "plugins": [
+      {"transform": "ts-transformer-imports"},
+      {"transform": "ts-transformer-imports", "afterDeclarations": true}
+    ],
+
     // Allow default imports from modules with no default export. This does not
     // affect code emit, just typechecking.
     "allowSyntheticDefaultImports": true,
@@ -18,6 +32,9 @@
 
     // Emit design-type metadata for decorated declarations in source.
     "emitDecoratorMetadata": true,
+
+    // This allows us to use synthetic default imports in emitted code.
+    "esModuleInterop": true,
 
     // Enables experimental support for ES7 decorators.
     "experimentalDecorators": true,
