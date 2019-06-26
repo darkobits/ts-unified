@@ -43,7 +43,6 @@ const test = {
   default: {
     description: 'Run unit tests.',
     script: prefixBin('jest')
-    // script: ''
   },
   watch: {
     description: 'Run unit tests in watch mode.',
