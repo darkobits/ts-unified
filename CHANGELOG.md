@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 * Removing Babel and switching to TSC for compilation is a significant enough change that a major version bump seems warranted.
 
+  **Note:** After upgrading to version `2.0.0`, you can remove `babel.config.js` from your project as it is no longer required.
+
 
 
 ## [1.6.0](https://github.com/darkobits/ts-unified/compare/v1.5.0...v1.6.0) (2019-06-07)

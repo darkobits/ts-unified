@@ -14,8 +14,7 @@ Boilerplate for TypeScript-based Node modules.
 
 # Features
 
-* Compilation via Babel.
-  * Type-checking and declaration file generation with TypeScript.
+* Compilation, type-checking, and declaration generation with TypeScript.
 * Unit testing with Jest.
 * Linting with TSLint.
 * Version and change log management with `standard-version`.
@@ -36,28 +35,6 @@ $(npm bin)/nps --scripts
 ## Configuration Files
 
 This repository also provides configuration defaults for several common tools. Each is exported as a function that accepts an optional additional configuration object that will be merged with the default configuration.
-
-### Babel
-
-In your project root, create `babel.config.js`. Then, export the Babel configuration from ts-unified, optionally providing your own configuration to merge with the default.
-
-> `babel.config.js`
-
-Using base configuration:
-
-```js
-module.exports = require('@darkobits/ts-unified/dist/config/babel')();
-```
-
-Providing additional configuration:
-
-```js
-module.exports = require('@darkobits/ts-unified/dist/config/babel')({
-  presets: [
-    'my-custom-babel-preset'
-  ]
-});
-```
 
 ### Jest
 
