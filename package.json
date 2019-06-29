@@ -19,7 +19,7 @@
     "unified.del": "dist/bin/del.js",
     "unified.jest": "dist/bin/jest.js",
     "unified.standard-version": "dist/bin/standard-version.js",
-    "unified.tsc": "dist/bin/tsc.js",
+    "unified.ttsc": "dist/bin/tsc.js",
     "unified.tslint": "dist/bin/tslint.js"
   },
   "scripts": {

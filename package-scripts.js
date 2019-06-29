@@ -1,6 +1,6 @@
 require('ts-node/register');
 
-module.exports = require('./src/config/package-scripts.ts').default({
+module.exports = require('./src/config/package-scripts.ts')({
   scripts: {
     'postbuild': [
       'cp-cli src/config/tsconfig-settings.json dist/config/tsconfig.json',
