@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/darkobits/ts-unified/compare/v2.0.0...v2.1.0) (2019-06-29)
+
+
+### Bug Fixes
+
+* Copy non-TS source files after building. ([0d4cadd](https://github.com/darkobits/ts-unified/commit/0d4cadd))
+
+
+### Features
+
+* Support user-defined pre/post scripts on build and bump tasks. ([98f2bca](https://github.com/darkobits/ts-unified/commit/98f2bca))
+
+
+
 ## [2.0.0](https://github.com/darkobits/ts-unified/compare/v1.6.0...v2.0.0) (2019-06-29)
 
 
