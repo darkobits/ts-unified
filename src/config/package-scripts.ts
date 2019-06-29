@@ -23,7 +23,7 @@ function prefixBin(binName: string) {
 }
 
 
-export default (userScripts: LooseObject = {}) => {
+function mergeScripts(userScripts: LooseObject = {}) {
   const clean = {
     description: 'Removes stale build artifacts.',
     script: `${prefixBin('del')} ${OUT_DIR}`
@@ -114,7 +114,6 @@ export default (userScripts: LooseObject = {}) => {
     script: npsUtils.series(build.default.script, `${test.default.script} --passWithNoTests`)
   };
 
-
   return merge({
     scripts: {
       clean,
@@ -126,4 +125,10 @@ export default (userScripts: LooseObject = {}) => {
       prepare
     }
   }, userScripts);
-};
+}
+
+
+export default mergeScripts;
+
+// @ts-ignore
+module.exports = mergeScripts;
