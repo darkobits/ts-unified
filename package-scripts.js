@@ -1,2 +1,5 @@
-require('ts-node').register();
-module.exports = require('./src/config/package-scripts')();
+module.exports = require('./src/config/package-scripts')({
+  scripts: {
+    'postbuild': 'cp-cli src/config dist/config'
+  }
+});
