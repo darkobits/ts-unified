@@ -1,4 +1,6 @@
-module.exports = require('./src/config/jest')({
+require('ts-node/register');
+
+module.exports = require('./src/config/jest.ts').default({
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/dist',

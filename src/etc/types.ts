@@ -1,3 +1,3 @@
-export interface Foo {
-  bar: string;
+export interface LooseObject {
+  [index: string]: any;
 }

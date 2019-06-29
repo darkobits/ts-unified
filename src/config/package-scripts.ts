@@ -1,8 +1,10 @@
-const path = require('path');
-const merge = require('deepmerge');
-const npsUtils = require('nps-utils');
+import path from 'path';
+import merge from 'deepmerge';
+// @ts-ignore
+import * as npsUtils from 'nps-utils';
 
-const {SRC_DIR, OUT_DIR, EXTENSIONS_WITH_DOT} = require('../etc/constants');
+import {OUT_DIR} from '../etc/constants';
+import {LooseObject} from '../etc/types';
 
 
 /**
@@ -10,10 +12,10 @@ const {SRC_DIR, OUT_DIR, EXTENSIONS_WITH_DOT} = require('../etc/constants');
  * name unmodified. Otherwise, prepends the bin prefix used by this package to
  * ensure that consumers reference our binaries.
  */
-function prefixBin(binName) {
+function prefixBin(binName: string) {
   const binPrefix = 'unified';
 
-  if (module.parent.id === path.resolve(__dirname, '..', '..', 'package-scripts.js')) {
+  if (module.parent && module.parent.id === path.resolve(__dirname, '..', '..', 'package-scripts.js')) {
     return binName;
   }
 
@@ -21,7 +23,7 @@ function prefixBin(binName) {
 }
 
 
-module.exports = (userScripts = {}) => {
+export default (userScripts: LooseObject = {}) => {
   const clean = {
     description: 'Removes stale build artifacts.',
     script: `${prefixBin('del')} ${OUT_DIR}`
@@ -113,7 +115,7 @@ module.exports = (userScripts = {}) => {
   };
 
 
-  const finalScripts = merge({
+  return merge({
     scripts: {
       clean,
       lint,
@@ -124,6 +126,4 @@ module.exports = (userScripts = {}) => {
       prepare
     }
   }, userScripts);
-
-  return finalScripts;
 };

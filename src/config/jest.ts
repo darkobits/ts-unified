@@ -1,6 +1,7 @@
-const merge = require('deepmerge');
-const {EXTENSIONS, SRC_DIR, OUT_DIR} = require('../etc/constants');
+import merge from 'deepmerge';
 
+import {EXTENSIONS, SRC_DIR, OUT_DIR} from '../etc/constants';
+import {LooseObject} from '../etc/types';
 
 /**
  * Paths we always want Jest to ignore.
@@ -40,6 +41,6 @@ const jestConfig = {
 };
 
 
-module.exports = (userConfig = {}) => {
+export default (userConfig: LooseObject = {}) => {
   return merge(jestConfig, userConfig);
 };
