@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/darkobits/ts-unified/compare/v2.1.0...v2.1.1) (2019-06-29)
+
+
+### Bug Fixes
+
+* Copy non-TS source files afer building. ([a6b5869](https://github.com/darkobits/ts-unified/commit/a6b5869))
+
+
+
 ## [2.1.0](https://github.com/darkobits/ts-unified/compare/v2.0.0...v2.1.0) (2019-06-29)
 
 
