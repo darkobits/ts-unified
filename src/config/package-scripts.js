@@ -66,7 +66,6 @@ module.exports = (userScripts = {}) => {
         // If there is a user-defined script named 'prebuild', run it.
         userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : '',
         clean.script,
-        lint.script,
         npsUtils.concurrent({lint: lint.script, babel, tsc: ttsc}),
         postBuild,
         // If there is a user-defined script named 'postbuild', run it.
