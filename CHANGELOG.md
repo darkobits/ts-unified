@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/darkobits/ts-unified/compare/v1.6.0...v2.0.0) (2019-06-29)
+
+
+### refactor
+
+* Use TypeScript for compilation. ([9b9e0af](https://github.com/darkobits/ts-unified/commit/9b9e0af))
+
+
+### BREAKING CHANGES
+
+* Removing Babel and switching to TSC for compilation is a significant enough change that a major version bump seems warranted.
+
+
+
 ## [1.6.0](https://github.com/darkobits/ts-unified/compare/v1.5.0...v1.6.0) (2019-06-07)
 
 
