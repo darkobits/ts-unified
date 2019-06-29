@@ -1,16 +1,15 @@
-import path from 'path';
+const path = require('path');
+const chalk = require('chalk');
+const readPkgUp = require('read-pkg-up');
+const resolvePkg = require('resolve-pkg');
 
-import chalk from 'chalk';
-import readPkgUp from 'read-pkg-up';
-import resolvePkg from 'resolve-pkg';
-
-import log from 'lib/log';
+const log = require('lib/log');
 
 
 /**
  * Resolves the absolute path to the binary of a given package.
  */
-export async function resolveBin(pkgName: string, binName?: string) {
+async function resolveBin(pkgName, binName) {
   // Resolve the indicated package relative to this package.
   const pkgPath = resolvePkg(pkgName, {cwd: __dirname});
 
@@ -51,8 +50,14 @@ export async function resolveBin(pkgName: string, binName?: string) {
 /**
  * Provided a package name and optional binary name, loads the binary.
  */
-export async function requireBin(pkgName: string, binName?: string) {
+async function requireBin(pkgName, binName) {
   const binInfo = await resolveBin(pkgName, binName);
   log.verbose('bin', `Using ${chalk.bold(`${binName || pkgName}`)} version ${chalk.green(binInfo.version)}.`);
   require(binInfo.path);
 }
+
+
+module.exports = {
+  resolveBin,
+  requireBin
+};

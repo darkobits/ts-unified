@@ -1,5 +1,5 @@
 {
-  "extends": "./src/config/tsconfig-settings.json",
+  "extends": "./src/config/tsconfig.json",
   "compilerOptions": {
     // Base directory to resolve non-relative module names.
     "baseUrl": ".",

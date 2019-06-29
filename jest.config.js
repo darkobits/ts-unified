@@ -1,6 +1,6 @@
-require('ts-node/register');
+require('@babel/register');
 
-module.exports = require('./src/config/jest.ts')({
+module.exports = require('./src/config/jest')({
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/dist',
