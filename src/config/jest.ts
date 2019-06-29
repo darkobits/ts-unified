@@ -41,6 +41,10 @@ const jestConfig = {
 };
 
 
-export default (userConfig: LooseObject = {}) => {
+export default function mergeConfig(userConfig: LooseObject = {}) {
   return merge(jestConfig, userConfig);
-};
+}
+
+
+// @ts-ignore
+module.exports = mergeConfig;
