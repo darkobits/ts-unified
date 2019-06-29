@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/darkobits/ts-unified/compare/v2.1.5...v3.0.0) (2019-06-29)
+
+
+### refactor
+
+* Revert to Babel + TSC. ([2b6471b](https://github.com/darkobits/ts-unified/commit/2b6471b))
+
+
+### BREAKING CHANGES
+
+* Bumping to 3.0 due to significant architectural changes.
+
+
+
 ### [2.1.5](https://github.com/darkobits/ts-unified/compare/v2.1.4...v2.1.5) (2019-06-29)
 
 
