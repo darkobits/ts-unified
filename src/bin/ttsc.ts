@@ -2,4 +2,4 @@
 
 import {requireBin} from 'lib/utils';
 
-export default requireBin('typescript', 'tsc');
+export default requireBin('ttypescript', 'ttsc');
