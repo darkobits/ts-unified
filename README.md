@@ -9,7 +9,7 @@
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/conventional%20commits-1.0.0-027dc6.svg?style=flat-square"></a>
 </p>
 
-Boilerplate for TypeScript-based Node modules.
+Boilerplate-as-a-package for TypeScript-based Node modules. To create a new repository based on `ts-unified`, check out the [`ts-unified` template repository](https://github.com/darkobits/ts-unified-starter).
 
 # Features
 
