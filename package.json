@@ -59,7 +59,7 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-xo": "~0.16.0",
     "ttypescript": "^1.5.7",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
