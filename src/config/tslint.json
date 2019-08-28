@@ -87,7 +87,9 @@
     },
 
     // Suppress deprecation warnings about this rule until tslint-xo removes it.
-    "no-use-before-declare": false,
+    "no-use-before-declare": {
+      "severity": "off"
+    },
 
     // Don"t require explicit type definitions on everything. In many cases,
     // TypeScript can "trivially infer" types and a type definition would be
