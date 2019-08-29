@@ -143,4 +143,4 @@ module.exports = (userScripts = {}) => {
       prepare
     }
   }, userScripts);
-}
+};

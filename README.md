@@ -3,22 +3,22 @@
 </a>
 <p align="center">
   <a href="https://www.npmjs.com/package/@darkobits/ts-unified"><img src="https://img.shields.io/npm/v/@darkobits/ts-unified.svg?style=flat-square"></a>
-  <a href="https://travis-ci.org/darkobits/ts-unified"><img src="https://img.shields.io/travis/darkobits/ts-unified.svg?style=flat-square"></a>
+  <a href="https://github.com/darkobits/ts-unified/actions"><img src="https://img.shields.io/endpoint?url=https://aws.frontlawn.net/ga-shields/darkobits/ts-unified&style=flat-square"></a>
   <a href="https://www.codacy.com/app/darkobits/ts-unified"><img src="https://img.shields.io/codacy/coverage/292afa3db205485ba5e39109b7b5b151.svg?style=flat-square"></a>
   <a href="https://david-dm.org/darkobits/ts-unified"><img src="https://img.shields.io/david/darkobits/ts-unified.svg?style=flat-square"></a>
-  <a href="https://github.com/conventional-changelog/standard-version"><img src="https://img.shields.io/badge/conventional%20commits-1.0.0-027dc6.svg?style=flat-square"></a>
-  <a href="https://github.com/sindresorhus/xo"><img src="https://img.shields.io/badge/code_style-XO-e271a5.svg?style=flat-square"></a>
+  <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/conventional%20commits-1.0.0-027dc6.svg?style=flat-square"></a>
 </p>
 
-Boilerplate for TypeScript-based Node modules.
+Boilerplate-as-a-package for TypeScript-based Node modules. To create a new repository based on `ts-unified`, check out the [`ts-unified` template repository](https://github.com/darkobits/ts-unified-starter).
 
 # Features
 
-* Compilation, type-checking, and declaration generation with TypeScript.
-* Unit testing with Jest.
-* Linting with TSLint.
-* Version and change log management with `standard-version`.
-* Package script management with NPS.
+* Compilation with [Babel](https://babeljs.io/).
+* Type-checking and declaration generation with [TypeScript](https://www.typescriptlang.org).
+* Unit testing with [Jest](https://jestjs.io/).
+* Linting with [TSLint](https://palantir.github.io/tslint/).
+* Version and change log management with [`standard-version`](https://github.com/conventional-changelog/standard-version).
+* Package script management with [NPS](https://github.com/sezna/nps).
 
 # Usage
 
@@ -26,15 +26,42 @@ Boilerplate for TypeScript-based Node modules.
 npm install --save-dev @darkobits/ts-unified
 ```
 
-This repository provides most of the build and code quality tooling needed for modern TypeScript-based projects. It also provides several common package scripts for building, testing, and versioning a project. These scripts are provided via NPS. For a complete list of all provided scripts, run:
-
-```
-$(npm bin)/nps --scripts
-```
+This repository provides most of the build and code quality tooling needed for modern TypeScript-based projects. It also provides several common package scripts for building, testing, and versioning a project. These scripts are provided via NPS. For more information, see the [NPS](#nps) section below.
 
 ## Configuration Files
 
-This repository also provides configuration defaults for several common tools. Each is exported as a function that accepts an optional additional configuration object that will be merged with the default configuration.
+This section will walk you through setting up the configuration files required by the various tools that `ts-unified` provides support for. Each base configuration file is provided as a function that accepts an optional additional configuration object that will be merged with the default configuration, allowing projects to extend or modify the base configuration.
+
+### NPS
+
+In your project root, create `package-scripts.js`. Then, export the NPS configuration from `ts-unified`, optionally providing your own configuration/scripts to merge with the defaults.
+
+> `package-scripts.js`
+
+Using base configuration:
+
+```js
+module.exports = require('@darkobits/ts-unified/dist/config/package-scripts')();
+```
+
+Providing additional configuration:
+
+```js
+module.exports = require('@darkobits/ts-unified/dist/config/package-scripts')({
+  scripts: {
+    foo: {
+      description: 'My awesome script.',
+      script: 'foo --bar --baz'
+    }
+  }
+});
+```
+
+Once you have created this file, you can get a list of all NPS scripts provided via `ts-unified` by running the following command:
+
+```
+npx nps --scripts
+```
 
 ### Jest
 
@@ -58,32 +85,8 @@ module.exports = require('@darkobits/ts-unified/dist/config/jest')({
 });
 ```
 
-### NPS
 
-In your project root, create `package-scripts.js`. Then, export the NPS configuration from ts-unified, optionally providing your own configuration to merge with the default.
-
-> `package-scripts.js`
-
-Using base configuration:
-
-```js
-module.exports = require('@darkobits/ts-unified/dist/config/package-scripts')();
-```
-
-Providing additional configuration:
-
-```js
-module.exports = require('@darkobits/ts-unified/dist/config/package-scripts')({
-  scripts: {
-    foo: {
-      description: 'My awesome script.',
-      script: 'foo --bar --baz'
-    }
-  }
-});
-```
-
-### TypeScript\\\
+### TypeScript
 
 In your project root, create `tsconfig.json`. Then, extend the TypeScript configuration from ts-unified, optionally providing your own configuration. It is recommended that you at least set `baseUrl`, `outDir`, and `paths`; these cannot be set by ts-unified because TypeScript computes them relative to the `tsconfig.json` file from which they were declared.
 
@@ -130,7 +133,7 @@ Using base configuration:
 For a list of all scripts provided by ts-unified, make sure you have created a `package-scripts.js` file in your project root per the instructions above. Then, you may run:
 
 ```
-$(npm bin)/nps --scripts
+npx nps --scripts
 ```
 
 ### Building
@@ -138,7 +141,7 @@ $(npm bin)/nps --scripts
 To build your project, assuming its source is located at `src` and build artifacts are to be written to `dist`, you may run:
 
 ```
-$(npm bin)/nps build
+npx nps build
 ```
 
 or add the following to your `package.json`:
@@ -158,7 +161,7 @@ npm run build
 To continuously build the project in watch mode:
 
 ```
-$(npm bin)/nps build.watch
+npx nps build.watch
 ```
 
 or:
@@ -178,7 +181,7 @@ npm run build:watch
 To run unit tests for your project, assuming your test files end in `.spec.ts`, you may run:
 
 ```
-$(npm bin)/nps test
+npx nps test
 ```
 
 or, add the following to your `package.json`:
@@ -198,7 +201,7 @@ npm test
 To continuously run tests in watch mode:
 
 ```
-$(npm bin)/nps test.watch
+npx nps test.watch
 ```
 
 or:
@@ -231,12 +234,12 @@ or:
 npm run test:coverage
 ```
 
-### Version-Bumping
+### Versioning
 
-To generate a `CHANGELOG.md` and bump the project's version, assuming you use Conventional Commits, you may run:
+To generate (or update) a `CHANGELOG.md` and bump the project's version, assuming you use [Conventional Commits](https://www.conventionalcommits.org), you may run:
 
 ```
-$(npm bin)/nps bump
+npx nps bump
 ```
 
 or, add the following to your `package.json`:
@@ -256,7 +259,7 @@ npm run bump
 Alternatively, if you need to create a beta tag:
 
 ```
-$(npm bin)/nps bump.beta
+npx nps bump.beta
 ```
 
 or:
@@ -273,13 +276,15 @@ npm run bump:beta
 
 ### NPM Lifecycles
 
-This repository also has a `prepare` script that will build and test the project. If you wish to use this script, add a `prepare` script to your project's `package.json`:
+`ts-unified` also provides a `prepare` script that will build and test the project. If you wish to use this script, add a `prepare` script to your project's `package.json`:
 
 ```json
 "scripts": {
   "prepare": "nps prepare"
 }
 ```
+
+This script will then be run after every `npm install` and as part of every `npm publish` command.
 
 ## &nbsp;
 <p align="center">
