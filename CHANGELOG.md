@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/darkobits/ts-unified/compare/v3.0.6...v3.1.0) (2019-09-25)
+
+
+### Features
+
+* **Jest:** Set `clearMocks` to `true`. ([f8c2bae](https://github.com/darkobits/ts-unified/commit/f8c2bae))
+
 ### [3.0.6](https://github.com/darkobits/ts-unified/compare/v3.0.5...v3.0.6) (2019-08-28)
 
 ### [3.0.5](https://github.com/darkobits/ts-unified/compare/v3.0.4...v3.0.5) (2019-08-21)
