@@ -20,45 +20,50 @@ function prefixBin(binName) {
   return `${binPrefix}.${binName}`;
 }
 
+const clean = {
+  description: 'Removes stale build artifacts.',
+  script: `${prefixBin('del')} ${OUT_DIR}`
+};
+
+const lint = {
+  description: 'Lints the project.',
+  script: `${prefixBin('tslint')} --project tsconfig.json  --format codeFrame`
+};
+
+const test = {
+  default: {
+    description: 'Run unit tests.',
+    script: prefixBin('jest')
+  },
+  watch: {
+    description: 'Run unit tests in watch mode.',
+    script: `${prefixBin('jest')} --watch`
+  },
+  coverage: {
+    description: 'Run unit tests and generate a coverage report.',
+    script: `${prefixBin('jest')} --coverage`
+  }
+};
+
+const babel = [
+  `${prefixBin('babel')} ${SRC_DIR}`,
+  `--extensions="${EXTENSIONS_WITH_DOT.join(',')}"`,
+  `--ignore="**/*.spec.*,**/*.d.ts"`,
+  `--out-dir="${OUT_DIR}"`,
+  `--copy-files`,
+  `--source-maps=true`
+].join(' ');
+
+const ttsc = `${prefixBin('ttsc')} --pretty`;
+const postBuild = `${prefixBin('del')} ${OUT_DIR}/**/*.spec.*`;
+
+const checkDeps = {
+  description: 'Check for newer versions of installed dependencies.',
+  script: 'npm-check --skip-unused'
+};
+
 
 module.exports = (userScripts = {}) => {
-  const clean = {
-    description: 'Removes stale build artifacts.',
-    script: `${prefixBin('del')} ${OUT_DIR}`
-  };
-
-  const lint = {
-    description: 'Lints the project.',
-    script: `${prefixBin('tslint')} --project tsconfig.json  --format codeFrame`
-  };
-
-  const test = {
-    default: {
-      description: 'Run unit tests.',
-      script: prefixBin('jest')
-    },
-    watch: {
-      description: 'Run unit tests in watch mode.',
-      script: `${prefixBin('jest')} --watch`
-    },
-    coverage: {
-      description: 'Run unit tests and generate a coverage report.',
-      script: `${prefixBin('jest')} --coverage`
-    }
-  };
-
-  const babel = [
-    `${prefixBin('babel')} ${SRC_DIR}`,
-    `--extensions="${EXTENSIONS_WITH_DOT.join(',')}"`,
-    `--ignore="**/*.spec.*,**/*.d.ts"`,
-    `--out-dir="${OUT_DIR}"`,
-    `--copy-files`,
-    `--source-maps=true`
-  ].join(' ');
-
-  const ttsc = `${prefixBin('ttsc')} --pretty`;
-  const postBuild = `${prefixBin('del')} ${OUT_DIR}/**/*.spec.*`;
-
   const build = {
     default: {
       description: 'Build the project.',
@@ -120,11 +125,6 @@ module.exports = (userScripts = {}) => {
         userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : ''
       ].filter(Boolean))
     }
-  };
-
-  const checkDeps = {
-    description: 'Check for newer versions of installed dependencies.',
-    script: 'npm-check --skip-unused'
   };
 
   const prepare = {
