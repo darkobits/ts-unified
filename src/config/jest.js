@@ -14,6 +14,7 @@ module.exports = (userConfig = {}) => merge({
   testEnvironment: 'node',
   testRegex: '^.+\\.spec.*$',
   testPathIgnorePatterns: ALWAYS_IGNORE,
+  clearMocks: true,
   collectCoverageFrom: [
     `<rootDir>/${SRC_DIR}/**/*.{${EXTENSIONS.join(',')}}`,
     '!**/node_modules/**',
