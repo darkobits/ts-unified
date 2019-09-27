@@ -91,6 +91,13 @@
       "severity": "off"
     },
 
+    // Require consistent object key quoting. If any key in an object literal
+    // requires quotes, all keys should be quoted.
+    "object-literal-key-quotes": {
+      "severity": "error",
+      "options": "consistent-as-needed"
+    },
+
     // Don"t require explicit type definitions on everything. In many cases,
     // TypeScript can "trivially infer" types and a type definition would be
     // redundant.
