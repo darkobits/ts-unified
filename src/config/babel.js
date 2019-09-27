@@ -6,7 +6,8 @@ module.exports = (userConfig = {}) => merge({
     [require.resolve('@babel/preset-env'), {
       targets: {node: '10'}
     }],
-    require.resolve('@babel/preset-typescript')
+    require.resolve('@babel/preset-typescript'),
+    require.resolve('@babel/preset-react')
   ],
   plugins: [
     [require.resolve('@babel/plugin-proposal-decorators'), {legacy: true}],
