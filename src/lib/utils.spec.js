@@ -27,7 +27,7 @@ jest.mock('read-pkg-up', () => {
   return jest.fn(async ({cwd}) => {
     if (cwd === '/path/to/pkg-with-named-bin') {
       return {
-        package: {
+        packageJson: {
           bin: {
             'pkg-with-named-bin': '/path/to/pkg-with-named-bin/bin'
           }
@@ -38,7 +38,7 @@ jest.mock('read-pkg-up', () => {
 
     if (cwd === '/path/to/pkg-with-no-bin') {
       return {
-        package: {},
+        packageJson: {},
         path: '/path/to/pkg-with-no-bin'
       };
     }
