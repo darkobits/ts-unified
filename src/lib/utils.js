@@ -24,7 +24,7 @@ async function resolveBin(pkgName, binName) {
     throw new Error('[resolveBin] Unable to find a package.json for the local project.');
   }
 
-  if (!pkgData.package.bin) {
+  if (!pkgData.packageJson.bin) {
     throw new Error(`[resolveBin] Package "${pkgName}" does not declare any binaries.`);
   }
 
@@ -33,7 +33,7 @@ async function resolveBin(pkgName, binName) {
   const pkgRoot = path.parse(pkgData.path).dir;
 
   // Extract the relative path to the indicated binary.
-  const relativeBinPath = binName ? pkgData.package.bin[binName] : pkgData.package.bin[pkgName];
+  const relativeBinPath = binName ? pkgData.packageJson.bin[binName] : pkgData.packageJson.bin[pkgName];
 
   if (!relativeBinPath) {
     throw new Error(`[resolveBin] Package "${pkgName}" does not have binary "${binName}".`);
@@ -42,7 +42,7 @@ async function resolveBin(pkgName, binName) {
   // Return the absolute path to the indicated binary.
   return {
     path: path.resolve(pkgRoot, relativeBinPath),
-    version: pkgData.package.version
+    version: pkgData.packageJson.version
   };
 }
 
