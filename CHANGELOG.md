@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/darkobits/ts-unified/compare/v3.1.0...v3.2.0) (2019-09-27)
+
+
+### Features
+
+* Add @babel/preset-react. ([2bc0496](https://github.com/darkobits/ts-unified/commit/2bc0496))
+* Add object-literal-key-quotes rule. ([795c562](https://github.com/darkobits/ts-unified/commit/795c562))
+
 ## [3.1.0](https://github.com/darkobits/ts-unified/compare/v3.0.6...v3.1.0) (2019-09-25)
 
 
