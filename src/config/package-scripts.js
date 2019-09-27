@@ -1,8 +1,13 @@
 const path = require('path');
+
 const merge = require('deepmerge');
 const npsUtils = require('nps-utils');
 
-const {EXTENSIONS_WITH_DOT, SRC_DIR, OUT_DIR} = require('etc/constants');
+const {
+  EXTENSIONS_WITH_DOT,
+  SRC_DIR,
+  OUT_DIR
+} = require('etc/constants');
 
 
 /**
@@ -20,69 +25,84 @@ function prefixBin(binName) {
   return `${binPrefix}.${binName}`;
 }
 
-const clean = {
-  description: 'Removes stale build artifacts.',
-  script: `${prefixBin('del')} ${OUT_DIR}`
-};
-
-const lint = {
-  description: 'Lints the project.',
-  script: `${prefixBin('tslint')} --project tsconfig.json  --format codeFrame`
-};
-
-const test = {
-  default: {
-    description: 'Run unit tests.',
-    script: prefixBin('jest')
-  },
-  watch: {
-    description: 'Run unit tests in watch mode.',
-    script: `${prefixBin('jest')} --watch`
-  },
-  coverage: {
-    description: 'Run unit tests and generate a coverage report.',
-    script: `${prefixBin('jest')} --coverage`
-  }
-};
-
-const babel = [
-  `${prefixBin('babel')} ${SRC_DIR}`,
-  `--extensions="${EXTENSIONS_WITH_DOT.join(',')}"`,
-  `--ignore="**/*.spec.*,**/*.d.ts"`,
-  `--out-dir="${OUT_DIR}"`,
-  `--copy-files`,
-  `--source-maps=true`
-].join(' ');
-
-const ttsc = `${prefixBin('ttsc')} --pretty`;
-const postBuild = `${prefixBin('del')} ${OUT_DIR}/**/*.spec.*`;
-
-const checkDeps = {
-  description: 'Check for newer versions of installed dependencies.',
-  script: 'npm-check --skip-unused'
-};
-
 
 module.exports = (userScripts = {}) => {
-  const build = {
+  const scripts = {};
+
+
+  // ----- Misc ----------------------------------------------------------------
+
+  scripts.clean = {
+    description: 'Removes stale build artifacts.',
+    script: `${prefixBin('del')} ${OUT_DIR}`
+  };
+
+  scripts.lint = {
+    description: 'Lints the project.',
+    script: `${prefixBin('tslint')} --project tsconfig.json  --format codeFrame`
+  };
+
+
+  // ----- Testing -------------------------------------------------------------
+
+  scripts.test = {
+    default: {
+      description: 'Run unit tests.',
+      script: prefixBin('jest')
+    },
+    watch: {
+      description: 'Run unit tests in watch mode.',
+      script: `${prefixBin('jest')} --watch`
+    },
+    coverage: {
+      description: 'Run unit tests and generate a coverage report.',
+      script: `${prefixBin('jest')} --coverage`
+    }
+  };
+
+  scripts.checkDeps = {
+    description: 'Check for newer versions of installed dependencies.',
+    script: 'npm-check --skip-unused'
+  };
+
+
+  // ----- Building ------------------------------------------------------------
+
+  const babel = [
+    `${prefixBin('babel')} ${SRC_DIR}`,
+    `--extensions="${EXTENSIONS_WITH_DOT.join(',')}"`,
+    `--ignore="**/*.d.ts"`,
+    `--out-dir="${OUT_DIR}"`,
+    `--copy-files`,
+    `--source-maps=true`
+  ].join(' ');
+
+  const ttsc = `${prefixBin('ttsc')} --pretty`;
+
+  // Babel's --ignore argument doesn't work as explained in the docs, especially
+  // with multiple patterns. It is easier to just go through the output folder
+  // and clean up what we don't want.
+  const postBuild = `${prefixBin('del')} ${OUT_DIR}/**/*.spec.*`;
+
+  scripts.build = {
     default: {
       description: 'Build the project.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebuild', run it.
-        userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : '',
-        clean.script,
-        npsUtils.concurrent({lint: lint.script, babel, tsc: ttsc}),
+        userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : undefined,
+        scripts.clean.script,
+        npsUtils.concurrent({lint: scripts.lint.script, babel, tsc: ttsc}),
         postBuild,
         // If there is a user-defined script named 'postbuild', run it.
-        userScripts.scripts && userScripts.scripts.postbuild ? 'nps postbuild' : ''
+        userScripts.scripts && userScripts.scripts.postbuild ? 'nps postbuild' : undefined
       ].filter(Boolean))
     },
     watch: {
       description: 'Continuously build the project',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebuild', run it.
-        userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : '',
-        clean.script,
+        userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : undefined,
+        scripts.clean.script,
         npsUtils.concurrent({
           tsc: `${ttsc} --preserveWatchOutput --watch`,
           babel: `${babel} --watch --verbose`
@@ -91,56 +111,55 @@ module.exports = (userScripts = {}) => {
     }
   };
 
-  const bump = {
+
+  // ----- Versioning ----------------------------------------------------------
+
+  scripts.bump = {
     default: {
       description: 'Generates a change log and tagged commit for a release.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebump', run it.
-        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : '',
-        build.default.script,
+        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : undefined,
+        scripts.build.default.script,
         prefixBin('standard-version'),
         // If there is a user-defined script named 'postbump', run it.
-        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : ''
+        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     },
     beta: {
       description: 'Generates a change log and tagged commit for a beta release.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebump', run it.
-        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : '',
-        build.default.script,
+        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : undefined,
+        scripts.build.default.script,
         `${prefixBin('standard-version')} --prerelease=beta`,
         // If there is a user-defined script named 'postbump', run it.
-        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : ''
+        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     },
     first: {
       description: 'Generates a change log and tagged commit for a project\'s first release.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebump', run it.
-        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : '',
-        build.default.script,
+        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : undefined,
+        scripts.build.default.script,
         `${prefixBin('standard-version')} --first-release`,
         // If there is a user-defined script named 'postbump', run it.
-        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : ''
+        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     }
   };
 
-  const prepare = {
+
+  // ----- Lifecycles ----------------------------------------------------------
+
+  scripts.prepare = {
     description: 'Runs after "npm install" to ensure the package compiles correctly.',
-    script: npsUtils.series(build.default.script, `${test.default.script} --passWithNoTests`)
+    script: npsUtils.series(scripts.build.default.script, `${scripts.test.default.script} --passWithNoTests`)
   };
 
+
   return merge({
-    scripts: {
-      clean,
-      lint,
-      test,
-      build,
-      bump,
-      checkDeps,
-      prepare
-    }
+    scripts
   }, userScripts);
 };

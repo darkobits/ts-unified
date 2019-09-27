@@ -1,3 +1,3 @@
-const LogFactory = require('@darkobits/log').default;
+const LogFactory = require('@darkobits/log');
 
 module.exports = LogFactory('ts-unified');
