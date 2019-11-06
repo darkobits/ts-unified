@@ -11,6 +11,8 @@ module.exports = (userConfig = {}) => merge({
   ],
   plugins: [
     [require.resolve('@babel/plugin-proposal-decorators'), {legacy: true}],
+    require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
+    require.resolve('@babel/plugin-proposal-optional-chaining'),
     require.resolve('@babel/plugin-proposal-class-properties'),
     require.resolve('babel-plugin-add-module-exports'),
     [require.resolve('babel-plugin-module-resolver'), {
