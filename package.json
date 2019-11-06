@@ -1,6 +1,6 @@
 {
   "name": "@darkobits/ts-unified",
-  "version": "3.2.4",
+  "version": "3.3.0-beta.0",
   "author": "darkobits",
   "license": "WTFPL",
   "description": "TypeScript boilerplate.",
