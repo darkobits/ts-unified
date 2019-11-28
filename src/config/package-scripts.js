@@ -62,7 +62,7 @@ module.exports = (userScripts = {}) => {
 
   scripts.checkDeps = {
     description: 'Check for newer versions of installed dependencies.',
-    script: 'npm-check --skip-unused'
+    script: 'npm-check --skip-unused || true'
   };
 
 
