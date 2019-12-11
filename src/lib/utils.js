@@ -1,5 +1,4 @@
 const path = require('path');
-const chalk = require('chalk');
 const readPkgUp = require('read-pkg-up');
 const resolvePkg = require('resolve-pkg');
 
@@ -52,7 +51,7 @@ async function resolveBin(pkgName, binName) {
  */
 async function requireBin(pkgName, binName) {
   const binInfo = await resolveBin(pkgName, binName);
-  log.verbose('bin', `Using ${chalk.bold(`${binName || pkgName}`)} version ${chalk.green(binInfo.version)}.`);
+  log.verbose('bin', `Using ${log.chalk.bold(`${binName || pkgName}`)} version ${log.chalk.green(binInfo.version)}.`);
   require(binInfo.path);
 }
 

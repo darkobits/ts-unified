@@ -1,3 +1,3 @@
 const LogFactory = require('@darkobits/log');
 
-module.exports = LogFactory('ts-unified');
+module.exports = LogFactory({heading: 'ts-unified'});
