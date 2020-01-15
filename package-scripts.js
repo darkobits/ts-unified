@@ -3,10 +3,4 @@ require('@babel/register')({
 });
 
 
-module.exports = require('./src/config/package-scripts')({
-  scripts: {
-    postbuild: {
-      default: 'cpy "./dist/config/**" "./dist" && del ./dist/config'
-    }
-  }
-});
+module.exports = require('./src/config/package-scripts')();
