@@ -3,7 +3,7 @@
     "plugins": [
       // Ensures that paths in emitted declaration files are re-written
       // properly.
-      {"transform": "ts-transformer-imports", "afterDeclarations": true}
+      {"transform": "@zerollup/ts-transform-paths"}
     ],
 
     // Specify a list of built-in API groups to include in the project.
