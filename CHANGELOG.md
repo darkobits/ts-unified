@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.0](https://github.com/darkobits/ts-unified/compare/v3.3.0...v4.0.0-beta.0) (2020-01-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Several import paths for configuration files no longer need the "dist/config" path segment.
+
+* Utilize TS in source files, use publish-root. ([7f1393a](https://github.com/darkobits/ts-unified/commit/7f1393ae8f0e6c58bdf47cbfb05f660ae8a1fc9a))
+
 ## [3.3.0](https://github.com/darkobits/ts-unified/compare/v3.3.0-beta.0...v3.3.0) (2019-12-11)
 
 ## [3.3.0-beta.0](https://github.com/darkobits/ts-unified/compare/v3.2.3...v3.3.0-beta.0) (2019-11-06)
