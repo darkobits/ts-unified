@@ -1,3 +1,7 @@
+/**
+ * Note: This file must be written in JavaScript and not use any features
+ * provided by Babel.
+ */
 const merge = require('babel-merge');
 
 

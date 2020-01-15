@@ -1,14 +1,19 @@
-const path = require('path');
-const readPkgUp = require('read-pkg-up');
-const resolvePkg = require('resolve-pkg');
+import path from 'path';
+import readPkgUp from 'read-pkg-up';
+import resolvePkg from 'resolve-pkg';
 
-const log = require('lib/log');
+// const path = require('path');
+// const readPkgUp = require('read-pkg-up');
+// const resolvePkg = require('resolve-pkg');
+
+// const log = require('lib/log');
+import log from 'lib/log';
 
 
 /**
  * Resolves the absolute path to the binary of a given package.
  */
-async function resolveBin(pkgName, binName) {
+export async function resolveBin(pkgName: string, binName?: string) {
   // Resolve the indicated package relative to this package.
   const pkgPath = resolvePkg(pkgName, {cwd: __dirname});
 
@@ -49,14 +54,8 @@ async function resolveBin(pkgName, binName) {
 /**
  * Provided a package name and optional binary name, loads the binary.
  */
-async function requireBin(pkgName, binName) {
+export async function requireBin(pkgName: string, binName?: string) {
   const binInfo = await resolveBin(pkgName, binName);
   log.verbose('bin', `Using ${log.chalk.bold(`${binName || pkgName}`)} version ${log.chalk.green(binInfo.version)}.`);
   require(binInfo.path);
 }
-
-
-module.exports = {
-  resolveBin,
-  requireBin
-};

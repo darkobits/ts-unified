@@ -1,13 +1,13 @@
-const path = require('path');
+import path from 'path';
+import merge from 'deepmerge';
+// @ts-ignore
+import * as npsUtils from 'nps-utils';
 
-const merge = require('deepmerge');
-const npsUtils = require('nps-utils');
-
-const {
+import {
   EXTENSIONS_WITH_DOT,
   SRC_DIR,
   OUT_DIR
-} = require('etc/constants');
+} from 'etc/constants';
 
 
 /**
@@ -15,7 +15,7 @@ const {
  * name unmodified. Otherwise, prepends the bin prefix used by this package to
  * ensure that consumers reference our binaries.
  */
-function prefixBin(binName) {
+function prefixBin(binName: string) {
   const binPrefix = 'unified';
 
   if (module.parent && module.parent.id === path.resolve(__dirname, '..', '..', 'package-scripts.js')) {
@@ -26,8 +26,8 @@ function prefixBin(binName) {
 }
 
 
-module.exports = (userScripts = {}) => {
-  const scripts = {};
+export default (userScripts: any = {}) => {
+  const scripts: any = {};
 
 
   // ----- Misc ----------------------------------------------------------------
@@ -71,10 +71,10 @@ module.exports = (userScripts = {}) => {
   const babel = [
     `${prefixBin('babel')} ${SRC_DIR}`,
     `--extensions="${EXTENSIONS_WITH_DOT.join(',')}"`,
-    `--ignore="**/*.d.ts"`,
+    '--ignore="**/*.d.ts"',
     `--out-dir="${OUT_DIR}"`,
-    `--copy-files`,
-    `--source-maps=true`
+    '--copy-files',
+    '--source-maps=true'
   ].join(' ');
 
   const ttsc = `${prefixBin('ttsc')} --pretty`;

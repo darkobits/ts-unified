@@ -1,6 +1,5 @@
-require('@babel/register');
-const merge = require('deepmerge');
-const {EXTENSIONS, SRC_DIR, OUT_DIR} = require('etc/constants');
+import merge from 'deepmerge';
+import {EXTENSIONS, SRC_DIR, OUT_DIR} from 'etc/constants';
 
 
 // Paths we always want Jest to ignore.
@@ -10,7 +9,7 @@ const ALWAYS_IGNORE = [
 ];
 
 
-module.exports = (userConfig = {}) => merge({
+export default (userConfig: any = {}) => merge({
   testEnvironment: 'node',
   testRegex: '^.+\\.spec.*$',
   testPathIgnorePatterns: ALWAYS_IGNORE,
