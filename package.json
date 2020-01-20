@@ -24,8 +24,6 @@
     "unified.tslint": "dist/bin/tslint.js"
   },
   "scripts": {
-    "prepack": "pre",
-    "postpack": "post",
     "test": "nps test",
     "build": "nps build",
     "bump": "nps bump",
@@ -66,7 +64,6 @@
     "typescript": "^3.7.4"
   },
   "devDependencies": {
-    "@darkobits/publish-root": "^1.0.0",
     "@types/deepmerge": "^2.2.0",
     "@types/jest": "^24.0.25",
     "@types/node": "^13.1.6",
