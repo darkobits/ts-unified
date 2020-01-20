@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.2](https://github.com/darkobits/ts-unified/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2020-01-20)
+
 ## [4.0.0-beta.1](https://github.com/darkobits/ts-unified/compare/v3.3.0...v4.0.0-beta.1) (2020-01-15)
 
 
