@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^25.1.5",
     "@types/node": "^12.12.17"
   }
 }
