@@ -89,19 +89,19 @@ export default (userScripts: any = {}) => {
       description: 'Build the project.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebuild', run it.
-        userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : undefined,
+        userScripts?.scripts?.prebuild ? 'nps prebuild' : undefined,
         scripts.clean.script,
         npsUtils.concurrent({lint: scripts.lint.script, babel, tsc: ttsc}),
         postBuild,
         // If there is a user-defined script named 'postbuild', run it.
-        userScripts.scripts && userScripts.scripts.postbuild ? 'nps postbuild' : undefined
+        userScripts?.scripts?.postbuild ? 'nps postbuild' : undefined
       ].filter(Boolean))
     },
     watch: {
       description: 'Continuously build the project',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebuild', run it.
-        userScripts.scripts && userScripts.scripts.prebuild ? 'nps prebuild' : undefined,
+        userScripts?.scripts?.prebuild ? 'nps prebuild' : undefined,
         scripts.clean.script,
         npsUtils.concurrent({
           tsc: `${ttsc} --preserveWatchOutput --watch`,
@@ -119,39 +119,39 @@ export default (userScripts: any = {}) => {
       description: 'Generates a change log and tagged commit for a release.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebump', run it.
-        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : undefined,
+        userScripts?.scripts?.prebump ? 'nps prebump' : undefined,
         scripts.build.default.script,
         prefixBin('standard-version'),
         // If there is a user-defined script named 'postbump', run it.
-        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : undefined
+        userScripts?.scripts?.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     },
     beta: {
       description: 'Generates a change log and tagged commit for a beta release.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebump', run it.
-        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : undefined,
+        userScripts?.scripts?.prebump ? 'nps prebump' : undefined,
         scripts.build.default.script,
         `${prefixBin('standard-version')} --prerelease=beta`,
         // If there is a user-defined script named 'postbump', run it.
-        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : undefined
+        userScripts?.scripts?.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     },
     first: {
-      description: 'Generates a change log and tagged commit for a project\'s first release.',
+      description: `Generates a changelog and tagged commit for a project's first release.`,
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebump', run it.
-        userScripts.scripts && userScripts.scripts.prebump ? 'nps prebump' : undefined,
+        userScripts?.scripts?.prebump ? 'nps prebump' : undefined,
         scripts.build.default.script,
         `${prefixBin('standard-version')} --first-release`,
         // If there is a user-defined script named 'postbump', run it.
-        userScripts.scripts && userScripts.scripts.postbump ? 'nps postbump' : undefined
+        userScripts?.scripts?.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     }
   };
 
 
-  // ----- Lifecycles ----------------------------------------------------------
+  // ----- Life Cycles ---------------------------------------------------------
 
   scripts.prepare = {
     description: 'Runs after "npm install" to ensure the package compiles correctly.',
@@ -159,7 +159,5 @@ export default (userScripts: any = {}) => {
   };
 
 
-  return merge({
-    scripts
-  }, userScripts);
+  return merge({scripts}, userScripts);
 };
