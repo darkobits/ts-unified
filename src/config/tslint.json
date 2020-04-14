@@ -98,6 +98,13 @@
       "options": "consistent-as-needed"
     },
 
+    // Enforce single quotes in JS/TS contexts, double quotes in JSX contexts,
+    // and allow template strings to avoid needing to use escape characters.
+    "quotemark": {
+      "severity": "error",
+      "options": ["single", "jsx-double", "avoid-escape"]
+    },
+
     // Don"t require explicit type definitions on everything. In many cases,
     // TypeScript can "trivially infer" types and a type definition would be
     // redundant.
