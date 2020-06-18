@@ -9,14 +9,15 @@
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/conventional%20commits-1.0.0-027dc6.svg?style=flat-square"></a>
 </p>
 
-Boilerplate-as-a-package for TypeScript-based Node modules. To create a new repository based on `ts-unified`, check out the [`ts-unified` template repository](https://github.com/darkobits/ts-unified-starter).
+Boilerplate-as-a-package for TypeScript-based projects. To create a new
+repository based on `ts-unified`, check out the [`ts-unified` template repository](https://github.com/darkobits/ts-unified-starter).
 
 # Features
 
 * Compilation with [Babel](https://babeljs.io/).
 * Type-checking and declaration generation with [TypeScript](https://www.typescriptlang.org).
 * Unit testing with [Jest](https://jestjs.io/).
-* Linting with [TSLint](https://palantir.github.io/tslint/).
+* Linting with [ESLint](https://eslint.org/).
 * Version and change log management with [`standard-version`](https://github.com/conventional-changelog/standard-version).
 * Package script management with [NPS](https://github.com/sezna/nps).
 
@@ -26,15 +27,30 @@ Boilerplate-as-a-package for TypeScript-based Node modules. To create a new repo
 npm install --save-dev @darkobits/ts-unified
 ```
 
-This repository provides most of the build and code quality tooling needed for modern TypeScript-based projects. It also provides several common package scripts for building, testing, and versioning a project. These scripts are provided via NPS. For more information, see the [NPS](#nps) section below.
+This repository provides most of the build and code quality tooling needed for
+modern TypeScript-based projects. It also provides several common package
+scripts for building, testing, and versioning a project. These scripts are
+provided via NPS. For more information, see the [NPS](#nps) section below.
 
 ## Configuration Files
 
-This section will walk you through setting up the configuration files required by the various tools that `ts-unified` provides support for. Each base configuration file is provided as a function that accepts an optional additional configuration object that will be merged with the default configuration, allowing projects to extend or modify the base configuration.
+This section will walk you through setting up the configuration files required
+by the various tools that `ts-unified` provides support for. Each base
+configuration file is provided as a function that accepts an optional additional
+configuration object that will be merged with the default configuration,
+allowing projects to extend or modify the base configuration.
 
 ### NPS
 
-In your project root, create `package-scripts.js`. Then, export the NPS configuration from `ts-unified`, optionally providing your own configuration/scripts to merge with the defaults.
+In your project root, create `package-scripts.js`. Then, export the NPS
+configuration from `ts-unified`, optionally providing your own
+configuration/scripts to merge with the defaults.
+
+**💡 PROTIP:** NPS does not provide a native `extends` feature, so configuration
+merging is achieved by passing an object containing your configuration to the
+function exported by `package-scripts`. If you do not need to provide any
+additional configuration, you still need to invoke this function to ensure the
+correct object is exported by your configuration file.
 
 > `package-scripts.js`
 
@@ -57,7 +73,8 @@ module.exports = require('@darkobits/ts-unified/dist/config/package-scripts')({
 });
 ```
 
-Once you have created this file, you can get a list of all NPS scripts provided via `ts-unified` by running the following command:
+Once you have created this file, you can get a list of all NPS scripts provided
+via `ts-unified` by running the following command:
 
 ```
 npx nps --scripts
@@ -65,7 +82,15 @@ npx nps --scripts
 
 ### Jest
 
-In your project root, create `jest.config.js`. Then, export the Jest configuration from ts-unified, optionally providing your own configuration to merge with the default.
+In your project root, create `jest.config.js`. Then, export the Jest
+configuration from `ts-unified`, optionally providing your own configuration to
+merge with the default.
+
+**💡 PROTIP:** Jest does not provide a native `extends` feature, so
+configuration merging is achieved by passing an object containing your
+configuration to the function exported by `jest`. If you do not need to provide
+any additional configuration, you still need to invoke this function to ensure
+the correct object is exported by your configuration file.
 
 > `jest.config.js`
 
@@ -88,7 +113,11 @@ module.exports = require('@darkobits/ts-unified/dist/config/jest')({
 
 ### TypeScript
 
-In your project root, create `tsconfig.json`. Then, extend the TypeScript configuration from ts-unified, optionally providing your own configuration. It is recommended that you at least set `baseUrl`, `outDir`, and `paths`; these cannot be set by ts-unified because TypeScript computes them relative to the `tsconfig.json` file from which they were declared.
+In your project root, create `tsconfig.json`. Then, `extend` the TypeScript
+configuration from `ts-unified`, optionally providing your own configuration. It
+is recommended that you at least set `baseUrl`, `outDir`, and `paths`; these
+cannot be set by `ts-unified` because TypeScript computes them relative to the
+`tsconfig.json` file from which they were declared.
 
 > `tsconfig.json`
 
@@ -101,36 +130,49 @@ Using base configuration:
     "baseUrl": ".",
     "outDir": "dist",
     "paths": {
-      "*": [
-        "*",
-        "src/*"
-      ]
+      "*": ["*", "src/*"]
     }
   },
-  // Additinal custom configuration here.
+  // Additional configuration here.
 }
 ```
 
-### TSLint
+### ESLint
 
-In your project root, create `tslint.json`. Then, extend the TSLint configuration from ts-unified, optionally providing your own rules.
+In your project root, create `.eslintrc.js`. Then, `extend` the ESLint
+configuration from `ts-unified`, optionally providing your own additional
+configuration.
 
-> `tslint.json`
+> `.eslintrc.js`
 
-Using base configuration:
+```js
+module.exports = {
+ extends: [
+    require.resolve('@darkobits/ts-unified/dist/config/eslint')
+  ]
+}
+```
 
-```jsonc
-{
-  "extends": "@darkobits/ts-unified/dist/config/tslint.json",
-  "rules": {
-    // Additional rules here.
-  }
+#### React Rules
+
+If you're working in a React project, `ts-unified` provides a React variant of
+its ESLint rules. To use these rules, `extend` `eslint-react`:
+
+> `.eslintrc.js`
+
+```js
+module.exports = {
+ extends: [
+    require.resolve('@darkobits/ts-unified/dist/config/eslint-react')
+  ]
 }
 ```
 
 ## Running Scripts
 
-For a list of all scripts provided by ts-unified, make sure you have created a `package-scripts.js` file in your project root per the instructions above. Then, you may run:
+For a list of all scripts provided by `ts-unified`, make sure you have created a
+`package-scripts.js` file in your project root per the instructions above. Then,
+you may run:
 
 ```
 npx nps --scripts
@@ -138,7 +180,8 @@ npx nps --scripts
 
 ### Building
 
-To build your project, assuming its source is located at `src` and build artifacts are to be written to `dist`, you may run:
+To build your project, assuming its source is located at `src` and build
+artifacts are to be written to `dist`, you may run:
 
 ```
 npx nps build
@@ -178,7 +221,8 @@ npm run build:watch
 
 ### Testing
 
-To run unit tests for your project, assuming your test files end in `.spec.ts`, you may run:
+To run unit tests for your project, assuming your test files end in `.spec.ts`,
+you may run:
 
 ```
 npx nps test
@@ -236,7 +280,9 @@ npm run test:coverage
 
 ### Versioning
 
-To generate (or update) a `CHANGELOG.md` and bump the project's version, assuming you use [Conventional Commits](https://www.conventionalcommits.org), you may run:
+To generate (or update) a `CHANGELOG.md` and bump the project's version,
+assuming you use [Conventional Commits](https://www.conventionalcommits.org),
+you may run:
 
 ```
 npx nps bump
@@ -274,9 +320,11 @@ or:
 npm run bump:beta
 ```
 
-### NPM Lifecycles
+### NPM Life Cycles
 
-`ts-unified` also provides a `prepare` script that will build and test the project. If you wish to use this script, add a `prepare` script to your project's `package.json`:
+`ts-unified` also provides a `prepare` script that will build and test the
+project. If you wish to use this script, add a `prepare` script to your
+project's `package.json`:
 
 ```json
 "scripts": {
@@ -284,7 +332,8 @@ npm run bump:beta
 }
 ```
 
-This script will then be run after every `npm install` and as part of every `npm publish` command.
+This script will then be run after every `npm install` and as part of every
+`npm publish` command.
 
 <a href="#top">
   <img src="https://user-images.githubusercontent.com/441546/69777002-41ac7380-1153-11ea-85a4-88184f8c9975.png" style="max-width: 100%;">

@@ -1,1 +1,3 @@
-module.exports = require('./src/config/babel')();
+module.exports = {
+  extends: './src/config/babel'
+};

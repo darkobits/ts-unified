@@ -1,14 +1,9 @@
-/**
- * Note: This file must be written in JavaScript and not use any features
- * provided by Babel.
- */
-const merge = require('babel-merge');
-
-
-module.exports = (userConfig = {}) => merge({
+// N.B. `module.exports` must be used in this file because it configures Babel,
+// which lets us use `export default` in all other files.
+module.exports = {
   presets: [
     [require.resolve('@babel/preset-env'), {
-      targets: {node: '10'}
+      targets: {node: '12'}
     }],
     require.resolve('@babel/preset-typescript'),
     require.resolve('@babel/preset-react')
@@ -31,5 +26,7 @@ module.exports = (userConfig = {}) => merge({
       ]
     }]
   ],
+  // N.B. This is set to `false` to prevent Babel from stripping-out Webpack
+  // 'magic' comments before Webpack can parse them.
   comments: false
-}, userConfig);
+};

@@ -1,11 +1,7 @@
-require('@babel/register')({
-  extensions: ['.ts', '.tsx', '.js', '.jsx', '.es', '.es6', '.mjs', '.json']
-});
+require('./src/etc/babel-register');
 
 module.exports = require('./src/config/jest')({
   coveragePathIgnorePatterns: [
-    '/node_modules/',
-    '<rootDir>/dist',
     '<rootDir>/src/bin',
     '<rootDir>/src/config',
     '<rootDir>/src/etc'

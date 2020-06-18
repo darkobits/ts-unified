@@ -4,28 +4,28 @@ import {EXTENSIONS, SRC_DIR, OUT_DIR} from 'etc/constants';
 
 // Paths we always want Jest to ignore.
 const ALWAYS_IGNORE = [
-  `<rootDir>/${OUT_DIR}`,
-  '/node_modules/'
+  '/node_modules/',
+  `<rootDir>/${OUT_DIR}`
 ];
 
 
-export default (userConfig: any = {}) => merge({
+export default (userConfig = {}) => merge({
   testEnvironment: 'node',
   testRegex: '^.+\\.spec.*$',
   testPathIgnorePatterns: ALWAYS_IGNORE,
   clearMocks: true,
   collectCoverageFrom: [
     `<rootDir>/${SRC_DIR}/**/*.{${EXTENSIONS.join(',')}}`,
-    '!**/node_modules/**',
+    '!**/node_modules/**'
   ],
   coveragePathIgnorePatterns: ALWAYS_IGNORE,
   moduleFileExtensions: [...EXTENSIONS, 'json'],
   coverageThreshold: {
     global: {
-      statements: 100,
-      branches: 95,
-      functions: 100,
-      lines: 100
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80
     }
   }
 }, userConfig);

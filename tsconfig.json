@@ -1,18 +1,8 @@
 {
   "extends": "./src/config/tsconfig.json",
   "compilerOptions": {
-    // Base directory to resolve non-relative module names.
-    "baseUrl": "src",
-
-    // "rootDir": "src",
-
-    // Redirect output structure to this directory.
+    "baseUrl": ".",
     "outDir": "dist",
-
-    // Specify path mapping to be computed relative to baseUrl option.
-    "paths": {"*": ["*"]},
-
-    // Skip type-checking of node_modules.
-    "skipLibCheck": true
+    "paths": {"*": ["*", "src/*"]}
   }
 }

@@ -13,7 +13,7 @@ jest.mock('resolve-pkg', () => {
       return '/path/to/pkg-with-no-bin';
     }
 
-    if (pkgName === 'non-existant-pkg') {
+    if (pkgName === 'non-existent-pkg') {
       return false;
     }
 
@@ -21,34 +21,31 @@ jest.mock('resolve-pkg', () => {
   });
 });
 
+jest.mock('read-pkg-up', () => jest.fn(async ({cwd}) => {
+  if (cwd === '/path/to/pkg-with-named-bin') {
+    return {
+      packageJson: {
+        bin: {
+          'pkg-with-named-bin': '/path/to/pkg-with-named-bin/bin'
+        }
+      },
+      path: '/path/to/pkg-with-named-bin'
+    };
+  }
 
-jest.mock('read-pkg-up', () => {
-  return jest.fn(async ({cwd}) => {
-    if (cwd === '/path/to/pkg-with-named-bin') {
-      return {
-        packageJson: {
-          bin: {
-            'pkg-with-named-bin': '/path/to/pkg-with-named-bin/bin'
-          }
-        },
-        path: '/path/to/pkg-with-named-bin'
-      };
-    }
+  if (cwd === '/path/to/pkg-with-no-bin') {
+    return {
+      packageJson: {},
+      path: '/path/to/pkg-with-no-bin'
+    };
+  }
 
-    if (cwd === '/path/to/pkg-with-no-bin') {
-      return {
-        packageJson: {},
-        path: '/path/to/pkg-with-no-bin'
-      };
-    }
+  if (cwd === '/path/to/non-existent-pkg') {
+    return false;
+  }
 
-    if (cwd === '/path/to/non-existant-pkg') {
-      return false;
-    }
-
-    throw new Error(`Unknown cwd: ${cwd}`);
-  });
-});
+  throw new Error(`Unknown cwd: ${cwd}`);
+}));
 
 
 describe('requireBin', () => {
@@ -93,11 +90,11 @@ describe('requireBin', () => {
       expect.assertions(3);
 
       try {
-        await requireBin('non-existant-pkg');
+        await requireBin('non-existent-pkg');
       } catch (err) {
-        expect(err.message).toMatch('Unable to resolve path to package "non-existant-pkg".');
+        expect(err.message).toMatch('Unable to resolve path to package "non-existent-pkg".');
         // @ts-ignore
-        expect(resolvePkg.mock.calls[0][0]).toBe('non-existant-pkg');
+        expect(resolvePkg.mock.calls[0][0]).toBe('non-existent-pkg');
         expect(readPkgUp).not.toHaveBeenCalled();
       }
     });
