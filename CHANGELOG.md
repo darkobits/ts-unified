@@ -7,15 +7,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### ⚠ BREAKING CHANGES
 
-* This update is a substantial change to this project's tooling, and will require users to replace their tsconfig.json file with an .eslintrc.js file, and properly extend this project's base rules.
+* This update is a substantial change to this project's tooling, and will
+  require users to replace their `tslint.json` file with an `.eslintrc.js` file,
+  and properly extend this project's base rules. See `README.md` for
+  instructions.
 
 * Migrate from TSLint to ESLint. ([8ae34e9](https://github.com/darkobits/ts-unified/commit/8ae34e9f9b8b62403558e4baf474fbe200b33859))
 
 ## [4.0.0](https://github.com/darkobits/ts-unified/compare/v4.0.0-beta.2...v4.0.0) (2020-04-13)
-
-## [4.0.0-beta.2](https://github.com/darkobits/ts-unified/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2020-01-20)
-
-## [4.0.0-beta.1](https://github.com/darkobits/ts-unified/compare/v3.3.0...v4.0.0-beta.1) (2020-01-15)
 
 
 ### ⚠ BREAKING CHANGES
@@ -25,22 +24,10 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * Don't hoist config files to root. ([2727a70](https://github.com/darkobits/ts-unified/commit/2727a7011678f0f48a927282ed34efb44cff9466))
-
-
 * Utilize TS in source files, use publish-root. ([f3e66e3](https://github.com/darkobits/ts-unified/commit/f3e66e39d5438f6ab9b64c835541ef6f92da7fbf))
 
-## [4.0.0-beta.0](https://github.com/darkobits/ts-unified/compare/v3.3.0...v4.0.0-beta.0) (2020-01-15)
-
-
-### ⚠ BREAKING CHANGES
-
-* Several import paths for configuration files no longer need the "dist/config" path segment.
-
-* Utilize TS in source files, use publish-root. ([7f1393a](https://github.com/darkobits/ts-unified/commit/7f1393ae8f0e6c58bdf47cbfb05f660ae8a1fc9a))
 
 ## [3.3.0](https://github.com/darkobits/ts-unified/compare/v3.3.0-beta.0...v3.3.0) (2019-12-11)
-
-## [3.3.0-beta.0](https://github.com/darkobits/ts-unified/compare/v3.2.3...v3.3.0-beta.0) (2019-11-06)
 
 
 ### Features
