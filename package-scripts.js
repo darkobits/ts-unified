@@ -1,6 +1,3 @@
-require('@babel/register')({
-  extensions: ['.ts', '.tsx', '.js', '.jsx', '.es', '.es6', '.mjs', '.json']
-});
-
+require('./src/etc/babel-register');
 
 module.exports = require('./src/config/package-scripts')();
