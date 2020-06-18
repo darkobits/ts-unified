@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/darkobits/ts-unified/compare/v4.0.0...v5.0.0) (2020-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* This update is a substantial change to this project's tooling, and will require users to replace their tsconfig.json file with an .eslintrc.js file, and properly extend this project's base rules.
+
+* Migrate from TSLint to ESLint. ([8ae34e9](https://github.com/darkobits/ts-unified/commit/8ae34e9f9b8b62403558e4baf474fbe200b33859))
+
 ## [4.0.0](https://github.com/darkobits/ts-unified/compare/v4.0.0-beta.2...v4.0.0) (2020-04-13)
 
 ## [4.0.0-beta.2](https://github.com/darkobits/ts-unified/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2020-01-20)
