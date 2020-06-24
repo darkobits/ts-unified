@@ -521,14 +521,8 @@ config.rules['@typescript-eslint/no-this-alias'] = ['error'];
 // Disallow throwing literals as exceptions.
 config.rules['@typescript-eslint/no-throw-literal'] = ['error'];
 
-// Limit the use of type aliases to intersections, unions, mapped types, and
-// tuples.
-config.rules['@typescript-eslint/no-type-alias'] = ['error', {
-  allowAliases: 'in-unions-and-intersections',
-  allowCallbacks: 'always',
-  allowMappedTypes: 'always',
-  allowTupleTypes: 'always'
-}];
+// Allow the use of type aliases.
+config.rules['@typescript-eslint/no-type-alias'] = 'off';
 
 // Disallow unnecessary equality comparisons against boolean literals.
 config.rules['@typescript-eslint/no-unnecessary-boolean-literal-compare'] = ['error'];
