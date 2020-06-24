@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/darkobits/ts-unified/compare/v5.0.0...v5.1.0) (2020-06-24)
+
+
+### Features
+
+* **eslint:** Allow the use of type aliases. ([1a8df04](https://github.com/darkobits/ts-unified/commit/1a8df04a30a70291181f0a87e34fd9c8ff47b251))
+
 ## [5.0.0](https://github.com/darkobits/ts-unified/compare/v4.0.0...v5.0.0) (2020-06-18)
 
 
