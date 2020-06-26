@@ -269,7 +269,10 @@ config.rules['jsx-a11y/label-has-for'] = 'off';
 // Configure the indent rule to ignore JSX nodes. The react/jsx-indent rule
 // will enforce indentation for JSX.
 config.rules['@typescript-eslint/indent'] = ['error', 2, {
-  ignoredNodes: ['JSXElement']
+  ignoredNodes: ['JSXElement'],
+  // Require an extra 2 spaces of indentation between switch statements and case
+  // statements.
+  SwitchCase: 1
 }];
 
 
