@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.1](https://github.com/darkobits/ts-unified/compare/v5.1.0...v5.1.1) (2020-06-26)
+
+
+### Bug Fixes
+
+* **eslint:** Apply switch case indent configuration to React rules. ([73a959d](https://github.com/darkobits/ts-unified/commit/73a959d79d3006d69303e410ae4c39adc36c2b52))
+
 ## [5.1.0](https://github.com/darkobits/ts-unified/compare/v5.0.0...v5.1.0) (2020-06-24)
 
 
