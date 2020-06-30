@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.2](https://github.com/darkobits/ts-unified/compare/v5.1.1...v5.1.2) (2020-06-30)
+
+
+### Bug Fixes
+
+* **babel:** Define 'targets' as an Array. ([1ae6a52](https://github.com/darkobits/ts-unified/commit/1ae6a52a21926674362e347f9c249ed5b56ddde1))
+
 ### [5.1.1](https://github.com/darkobits/ts-unified/compare/v5.1.0...v5.1.1) (2020-06-26)
 
 
