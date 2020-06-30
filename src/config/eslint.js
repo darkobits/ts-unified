@@ -765,18 +765,23 @@ config.rules['prefer-arrow/prefer-arrow-functions'] = ['error', {
 
 // ----- Overrides -------------------------------------------------------------
 
+/**
+ * Test files.
+ */
 config.overrides.push({
   files: [
     '*.test.*',
     '*.spec.*'
   ],
   rules: {
-    // In test files, do not require that async functions utilize the await
-    // keyword. This allows us to easily mock async functions with a mock
-    // implementation that may be synchronous.
+    // Do not require that async functions utilize the await keyword. This
+    // allows us to easily mock async functions with a mock implementation that
+    // may be synchronous.
     '@typescript-eslint/require-await': 'off',
-    // In test files, do not enforce naming convention rules for values.
-    '@typescript-eslint/naming-convention': 'off'
+    // Do not enforce naming convention rules for values.
+    '@typescript-eslint/naming-convention': 'off',
+    // Allow require() statements.
+    '@typescript-eslint/no-var-requires': 'off'
   }
 });
 
