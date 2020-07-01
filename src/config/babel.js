@@ -11,12 +11,13 @@ module.exports = {
     '@babel/preset-react'
   ],
   plugins: [
+    // This plugin must come before @babel/plugin-proposal-class-properties.
+    ['@babel/plugin-proposal-decorators', {legacy: true, loose: true}],
     '@babel/plugin-transform-runtime',
     '@babel/plugin-proposal-nullish-coalescing-operator',
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-class-properties',
     'babel-plugin-add-module-exports',
-    ['@babel/plugin-proposal-decorators', {legacy: true}],
     ['babel-plugin-module-resolver', {
       cwd: 'packagejson',
       root: ['./src'],
