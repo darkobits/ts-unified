@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.4](https://github.com/darkobits/ts-unified/compare/v5.1.3...v5.1.4) (2020-07-01)
+
+
+### Bug Fixes
+
+* **babel:** Ensure decorators plugin runs before class-properties plugin. ([53d6692](https://github.com/darkobits/ts-unified/commit/53d669209ce0bcf59349234429803c6667452b86))
+
 ### [5.1.3](https://github.com/darkobits/ts-unified/compare/v5.1.2...v5.1.3) (2020-06-30)
 
 
