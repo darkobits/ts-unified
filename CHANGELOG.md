@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/darkobits/ts-unified/compare/v5.1.4...v5.2.0) (2020-08-01)
+
+
+### Features
+
+* Update dependencies. ([938555b](https://github.com/darkobits/ts-unified/commit/938555b2b984ca2e46d7125d3c27dce423afa6db))
+
 ### [5.1.4](https://github.com/darkobits/ts-unified/compare/v5.1.3...v5.1.4) (2020-07-01)
 
 
