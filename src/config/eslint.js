@@ -386,44 +386,39 @@ config.rules['@typescript-eslint/method-signature-style'] = 'off';
 
 // Enforce naming conventions for various kinds of symbols.
 config.rules['@typescript-eslint/naming-convention'] = ['warn', {
-  // By default, require a value be named using camel case.
+  // By default, require a value be named using camelCase.
   selector: 'default',
   format: ['camelCase']
 }, {
-  // Allow variables to be named in camelCase, UPPER_CASE, or PascalCase.
+  // Require variables to be named using camelCase, UPPER_CASE, or PascalCase.
   selector: 'variable',
   format: ['camelCase', 'UPPER_CASE', 'PascalCase']
 }, {
-  // Allow variables of type function to be named in camelCase or PascalCase.
-  selector: 'variable',
+  // Require functions or variables that refer to functions to be named using
+  // camelCase or PascalCase.
+  selector: [
+    'function',
+    'variable'
+  ],
   types: ['function'],
   format: ['camelCase', 'PascalCase']
 }, {
-  // Allow functions to be named in camelCase or PascalCase.
-  selector: 'function',
-  format: ['camelCase', 'PascalCase']
-}, {
-  // Require classes to be named in PascalCase.
-  selector: 'class',
-  format: ['PascalCase']
-}, {
-  // Require interfaces to be named in PascalCase.
-  selector: 'interface',
-  format: ['PascalCase']
-}, {
-  // Require type aliases to be named in PascalCase.
-  selector: 'typeAlias',
-  format: ['PascalCase']
-}, {
-  // Require type parameters to be named in PascalCase.
-  selector: 'typeParameter',
+  // Require classes, interfaces, type aliases, and type parameters to be named
+  // using PascalCase.
+  selector: [
+    'class',
+    'interface',
+    'typeAlias',
+    'typeParameter'
+  ],
   format: ['PascalCase']
 }, {
   // Do not enforce any naming conventions for object properties because we
   // often need to use objects whose shape is defined by a third-party API or
   // schema that we have no control over.
   selector: 'property',
-  format: null // eslint-disable-line unicorn/no-null
+  // eslint-disable-next-line unicorn/no-null
+  format: null
 }];
 
 // Disallow the use of `new Array()`.
@@ -659,7 +654,7 @@ config.rules['@typescript-eslint/restrict-plus-operands'] = ['error'];
 // values typed as ('myStringA' | 'myStringB') as type `never` when the value is
 // clearly restricted to the type `string`.
 //
-// config.rules['@typescript-eslint/restrict-template-expressions'] = ['error', {
+// config.rules['@typescript-eslint/restrict-template-expressions']=['error',{
 //   allowNumber: true,
 //   allowBoolean: true,
 //   allowAny: true,
