@@ -394,23 +394,18 @@ config.rules['@typescript-eslint/naming-convention'] = ['warn', {
   selector: 'variable',
   format: ['camelCase', 'UPPER_CASE', 'PascalCase']
 }, {
-  // Require functions or variables that refer to functions to be named using
-  // camelCase or PascalCase.
-  selector: [
-    'function',
-    'variable'
-  ],
+  // Require function expressions to be named using camelCase or PascalCase.
+  selector: 'variable',
   types: ['function'],
+  format: ['camelCase', 'PascalCase']
+}, {
+  // Require function declarations to be named using camelCase or PascalCase.
+  selector: 'function',
   format: ['camelCase', 'PascalCase']
 }, {
   // Require classes, interfaces, type aliases, and type parameters to be named
   // using PascalCase.
-  selector: [
-    'class',
-    'interface',
-    'typeAlias',
-    'typeParameter'
-  ],
+  selector: ['class', 'interface', 'typeAlias', 'typeParameter'],
   format: ['PascalCase']
 }, {
   // Do not enforce any naming conventions for object properties because we
@@ -649,18 +644,12 @@ config.rules['@typescript-eslint/require-await'] = ['warn'];
 config.rules['@typescript-eslint/restrict-plus-operands'] = ['error'];
 
 // Enforce the types allowed in template literal expressions.
-//
-// TEMPORARILY DISABLED: As of June 2020, this rule currently mis-interprets
-// values typed as ('myStringA' | 'myStringB') as type `never` when the value is
-// clearly restricted to the type `string`.
-//
-// config.rules['@typescript-eslint/restrict-template-expressions']=['error',{
-//   allowNumber: true,
-//   allowBoolean: true,
-//   allowAny: true,
-//   allowNullable: true
-// }];
-config.rules['@typescript-eslint/restrict-template-expressions'] = 'off';
+config.rules['@typescript-eslint/restrict-template-expressions'] = ['error', {
+  allowNumber: true,
+  allowBoolean: true,
+  allowAny: true,
+  allowNullable: true
+}];
 
 // Enforces await-ing of Promise-like values before returning them. This allows
 // for better stack traces if the promise rejects.
