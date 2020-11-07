@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-beta.0](https://github.com/darkobits/ts-unified/compare/v5.3.0-beta.0...v6.0.0-beta.0) (2020-11-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** This update introduces several new rules and changes to existing rules that may require updates to existing projects.
+* Users will need to use the updated 'deps.check' script name.
+
+### Features
+
+* Ensure user-defined scripts are used during NPM lifecycle scripts. ([1fe3d9e](https://github.com/darkobits/ts-unified/commit/1fe3d9ea444e506abc73d89990b8c302114d3a1a))
+
+
+* **deps:** Update eslint-plugin-unicorn. ([78ce468](https://github.com/darkobits/ts-unified/commit/78ce4686e58edbd6dba0ff360b1370d7fcb491a4))
+* Rename 'checkDeps' to 'deps.check'. ([58dd15d](https://github.com/darkobits/ts-unified/commit/58dd15df0adacbc1d2c3fa3773661c6a15bac04f))
+
 ## [5.3.0-beta.0](https://github.com/darkobits/ts-unified/compare/v5.2.1...v5.3.0-beta.0) (2020-11-07)
 
 
