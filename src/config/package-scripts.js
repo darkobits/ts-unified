@@ -1,45 +1,77 @@
-import path from 'path';
 import merge from 'deepmerge';
 import * as npsUtils from 'nps-utils';
+import readPkgUp from 'read-pkg-up';
 
 import {
   EXTENSIONS_WITH_DOT,
   SRC_DIR,
   OUT_DIR
 } from 'etc/constants';
+import log from 'lib/log';
+
+
+const closestPkgInfo = readPkgUp.sync();
 
 
 /**
- * If required by our local package-scripts file, returns the provided binary
- * name unmodified. Otherwise, prepends the bin prefix used by this package to
- * ensure that consumers reference our binaries.
+ * Because ts-unified shares the below scripts with its own dependents, we need
+ * to differentiate when a binary is being invoked by ts-unified and when it is
+ * being invoked by a dependent, because during the install/prepare phase for
+ * ts-unified, NPM will not have linked the "bin" entries from our package.json
+ * yet, and those entries point to files in our "dist" folder, which has not
+ * been created yet.
+ *
+ * So, when used locally, a script needs to use the "raw" bin name, and when
+ * used by a dependent, a script needs to use the "unified." prefix.
+ *
+ * This function checks the name of the closest package.json file (walking up
+ * the directory tree from process.cwd) and compares it to our package name to
+ * determine if prefixing should occur.
  */
 const prefixBin = binName => {
-  const binPrefix = 'unified';
-
-  if (module.parent && module.parent.id === path.resolve(__dirname, '..', '..', 'package-scripts.js')) {
+  if (closestPkgInfo && closestPkgInfo.packageJson.name === '@darkobits/ts-unified') {
     return binName;
   }
 
-  return `${binPrefix}.${binName}`;
+  return `unified.${binName}`;
 };
 
 
-export default userArgument => {
-  let userScripts;
+/**
+ * Introspects the argument passed to this module's default export/function, and
+ * returns an object representing any user-provided scripts/options.
+ */
+const getUserScripts = userArgument => {
+  let userScripts = {
+    scripts: {},
+    options: {}
+  };
 
   if (typeof userArgument === 'function') {
-    userScripts = userArgument({
-      npsUtils,
-      bin: prefixBin
-    });
-  } else if (typeof userArgument === 'object') {
-    userScripts = userArgument;
-  } else {
-    userScripts = {};
+    // TODO: Determine if "bin" is still needed here.
+    userScripts = userArgument({ npsUtils, bin: prefixBin });
   }
 
+  if (typeof userArgument === 'object') {
+    userScripts = userArgument;
+  }
+
+  if (!Reflect.has(userScripts, 'scripts') && !Reflect.has(userScripts, 'options')) {
+    log.warn(log.prefix('package-scripts'), 'Object returned did not contain "scripts" or "options" keys. This may be an error.');
+  }
+
+  return userScripts;
+};
+
+
+/**
+ * Our default export is a function that can accept nothing, an NPS
+ * scripts/options object, or a function that returns an NPS scripts/options
+ * object.
+ */
+export default userArgument => {
   const scripts = {};
+  const userScripts = getUserScripts(userArgument);
 
 
   // ----- Dependency Management -----------------------------------------------
@@ -54,12 +86,20 @@ export default userArgument => {
 
   // ----- Linting -------------------------------------------------------------
 
+  const ESLINT_COMMAND = [
+    prefixBin('eslint'),
+    'src',
+    '--ext',
+    '.ts,.tsx,.js,.jsx',
+    `--format=${require.resolve('eslint-codeframe-formatter')}`
+  ].join(' ');
+
   scripts.lint = {
     description: 'Lint the project.',
-    script: `${prefixBin('eslint')} src --ext .ts,.tsx,.js,.jsx --format=node_modules/eslint-codeframe-formatter`,
+    script: ESLINT_COMMAND,
     fix: {
       description: 'Lint the project and automatically fix all fixable errors.',
-      script: `${prefixBin('eslint')} src --ext .ts,.tsx,.js,.jsx --format=node_modules/eslint-codeframe-formatter --fix`
+      script: `${ESLINT_COMMAND} --fix`
     }
   };
 
