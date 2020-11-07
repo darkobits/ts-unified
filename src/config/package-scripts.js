@@ -42,11 +42,13 @@ export default userArgument => {
   const scripts = {};
 
 
-  // ----- Misc ----------------------------------------------------------------
+  // ----- Dependency Management -----------------------------------------------
 
-  scripts.checkDeps = {
-    description: 'Check for newer versions of installed dependencies.',
-    script: 'npm-check --skip-unused || true'
+  scripts.deps = {
+    check: {
+      description: 'Check for newer versions of installed dependencies.',
+      script: 'npm-check --skip-unused || true'
+    }
   };
 
 
