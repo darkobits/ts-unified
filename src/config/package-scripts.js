@@ -149,7 +149,7 @@ export default userArgument => {
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebuild', run it.
         // Otherwise, run the default prebuild routine.
-        userScripts?.scripts?.prebuild ? 'nps prebuild' : scripts.lint.script,
+        userScripts?.scripts?.prebuild ? 'nps prebuild' : undefined,
         // Then, build the project by concurrently running Babel and generating
         // type definitions. N.B. This will implicitly type-check the project.
         npsUtils.concurrent({
@@ -192,33 +192,27 @@ export default userArgument => {
     default: {
       description: 'Generates a change log and tagged commit for a release.',
       script: npsUtils.series(...[
-        // If there is a user-defined script named 'prebump', run it.
         userScripts?.scripts?.prebump ? 'nps prebump' : undefined,
-        scripts.build.default.script,
+        'nps prepare',
         prefixBin('standard-version'),
-        // If there is a user-defined script named 'postbump', run it.
         userScripts?.scripts?.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     },
     beta: {
       description: 'Generates a change log and tagged commit for a beta release.',
       script: npsUtils.series(...[
-        // If there is a user-defined script named 'prebump', run it.
         userScripts?.scripts?.prebump ? 'nps prebump' : undefined,
-        scripts.build.default.script,
+        'nps prepare',
         `${prefixBin('standard-version')} --prerelease=beta`,
-        // If there is a user-defined script named 'postbump', run it.
         userScripts?.scripts?.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     },
     first: {
       description: 'Generates a changelog and tagged commit for a project\'s first release.',
       script: npsUtils.series(...[
-        // If there is a user-defined script named 'prebump', run it.
         userScripts?.scripts?.prebump ? 'nps prebump' : undefined,
-        scripts.build.default.script,
+        'nps prepare',
         `${prefixBin('standard-version')} --first-release`,
-        // If there is a user-defined script named 'postbump', run it.
         userScripts?.scripts?.postbump ? 'nps postbump' : undefined
       ].filter(Boolean))
     }
@@ -232,6 +226,7 @@ export default userArgument => {
     // This ensures that "nps prepare" will run a user-defined build script if
     // they have set one.
     script: npsUtils.series.nps(
+      'lint',
       'build',
       'test.passWithNoTests'
     )
