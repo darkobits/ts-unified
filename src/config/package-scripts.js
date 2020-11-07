@@ -49,6 +49,9 @@ export default userArgument => {
     script: 'npm-check --skip-unused || true'
   };
 
+
+  // ----- Linting -------------------------------------------------------------
+
   scripts.lint = {
     description: 'Lint the project.',
     script: `${prefixBin('eslint')} src --ext .ts,.tsx,.js,.jsx --format=node_modules/eslint-codeframe-formatter`,
@@ -73,14 +76,19 @@ export default userArgument => {
     coverage: {
       description: 'Run unit tests and generate a coverage report.',
       script: `${prefixBin('jest')} --coverage`
+    },
+    passWithNoTests: {
+      description: 'Run unit tests, but do not fail if no tests exist.',
+      script: `${prefixBin('jest')} --passWithNoTests`
     }
   };
 
 
-  // ----- Building ------------------------------------------------------------
+  // ----- Babel ---------------------------------------------------------------
 
-  const babel = [
-    `${prefixBin('babel')} ${SRC_DIR}`,
+  const BABEL_COMMAND = [
+    prefixBin('babel'),
+    SRC_DIR,
     `--extensions="${EXTENSIONS_WITH_DOT.join(',')}"`,
     '--ignore="**/*.d.ts"',
     `--out-dir="${OUT_DIR}"`,
@@ -89,33 +97,70 @@ export default userArgument => {
     '--delete-dir-on-start'
   ].join(' ');
 
-  const ttsc = `${prefixBin('ttsc')} --pretty`;
-
-  // Babel's --ignore argument doesn't work as explained in the docs, especially
-  // with multiple patterns. It is easier to just go through the output folder
-  // and remove what we don't want.
-  const postBuild = `${prefixBin('del')} "${OUT_DIR}/**/*.spec.*" "${OUT_DIR}/**/*.test.*"`;
-
-  // N.B. This is typically only needed in Webpack projects where the project
-  // is not built using the Babel CLI but instead using the Webpack CLI.
-  scripts.typeCheck = {
-    description: 'Type-check the project.',
-    script: `${ttsc} --noEmit`
+  // N.B. This is named 'compile' rather than 'babel' so that NPS' string
+  // matching algorithm runs 'build.watch' when the user issues the command
+  // 'nps b.w'. Otherwise, NPS would run 'babel.watch'.
+  scripts.compile = {
+    default: {
+      description: 'Compile the project with Babel.',
+      script: [
+        BABEL_COMMAND,
+        '&&',
+        // Babel's --ignore argument doesn't work as explained in the docs,
+        // especially with multiple patterns. It is easier to just go through
+        // the output folder and remove what we don't want.
+        prefixBin('del'),
+        `"${OUT_DIR}/**/*.spec.*"`,
+        `"${OUT_DIR}/**/*.test.*"`
+      ].join(' ')
+    },
+    watch: {
+      description: 'Continuously compile the project with Babel.',
+      script: `${BABEL_COMMAND} --watch --verbose`
+    }
   };
+
+
+  // ----- TypeScript ----------------------------------------------------------
+
+  scripts.ts = {
+    default: {
+      description: 'Emit declarations for the project.',
+      script: `${prefixBin('ttsc')} --pretty --pretty --emitDeclarationOnly`
+    },
+    watch: {
+      description: 'Continuously type-check and emit declarations for the project.',
+      script: `${prefixBin('ttsc')} --pretty --emitDeclarationOnly --watch --preserveWatchOutput`
+    },
+    check: {
+      description: 'Type-check the project without emitting any files.',
+      script: `${prefixBin('ttsc')} --pretty --noEmit`
+    }
+  };
+
+
+  // ----- Build ---------------------------------------------------------------
 
   scripts.build = {
     default: {
-      description: 'Build the project.',
+      description: 'Lint, type-check, and build the project.',
       script: npsUtils.series(...[
         // If there is a user-defined script named 'prebuild', run it.
-        userScripts?.scripts?.prebuild ? 'nps prebuild' : undefined,
+        // Otherwise, run the default prebuild routine.
+        userScripts?.scripts?.prebuild ? 'nps prebuild' : scripts.lint.script,
+        // Then, build the project by concurrently running Babel and generating
+        // type definitions. N.B. This will implicitly type-check the project.
         npsUtils.concurrent({
-          lint: scripts.lint.script,
-          babel,
-          tsc: `${ttsc} --emitDeclarationOnly`
+          babel: {
+            script: scripts.compile.default.script,
+            color: 'bgYellow.gray'
+          },
+          ts: {
+            script: scripts.ts.default.script,
+            color: 'bgBlue.white'
+          }
         }),
-        postBuild,
-        // If there is a user-defined script named 'postbuild', run it.
+        // Finally, if there is a user-defined script named 'postbuild', run it.
         userScripts?.scripts?.postbuild ? 'nps postbuild' : undefined
       ].filter(Boolean))
     },
@@ -125,8 +170,14 @@ export default userArgument => {
         // If there is a user-defined script named 'prebuild', run it.
         userScripts?.scripts?.prebuild ? 'nps prebuild' : undefined,
         npsUtils.concurrent({
-          tsc: `${ttsc} --emitDeclarationOnly --preserveWatchOutput --watch`,
-          babel: `${babel} --watch --verbose`
+          babel: {
+            script: scripts.compile.watch.script,
+            color: 'bgYellow.gray'
+          },
+          tsc: {
+            script: scripts.ts.watch.script,
+            color: 'bgBlue.white'
+          }
         })
       ].filter(Boolean))
     }
@@ -176,7 +227,12 @@ export default userArgument => {
 
   scripts.prepare = {
     description: 'Runs after "npm install" to ensure the package compiles correctly.',
-    script: npsUtils.series(scripts.build.default.script, `${scripts.test.default.script} --passWithNoTests`)
+    // This ensures that "nps prepare" will run a user-defined build script if
+    // they have set one.
+    script: npsUtils.series.nps(
+      'build',
+      'test.passWithNoTests'
+    )
   };
 
 
