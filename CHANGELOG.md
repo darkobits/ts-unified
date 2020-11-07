@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-beta.1](https://github.com/darkobits/ts-unified/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2020-11-07)
+
+
+### Bug Fixes
+
+* Improve handling of user scripts and binary resolving. ([0a45348](https://github.com/darkobits/ts-unified/commit/0a4534835e3eebeba3f81cce159a8601351ffe47))
+
 ## [6.0.0-beta.0](https://github.com/darkobits/ts-unified/compare/v5.3.0-beta.0...v6.0.0-beta.0) (2020-11-07)
 
 
