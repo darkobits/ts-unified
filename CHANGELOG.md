@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0-beta.0](https://github.com/darkobits/ts-unified/compare/v5.2.1...v5.3.0-beta.0) (2020-11-07)
+
+
+### Features
+
+* **deps:** Upgrade ESLint to 4.6.1. ([091ea1b](https://github.com/darkobits/ts-unified/commit/091ea1bf91c7b75af9b1c17b941ccfe9118be827))
+* **deps:** Upgrade standard-version to 9.0.0. ([7dddfdb](https://github.com/darkobits/ts-unified/commit/7dddfdb5ca7c4e270e1e9429d7b73d10c27e7815))
+* **deps:** Upgrade TypeScript to 4.0.5. ([4768b66](https://github.com/darkobits/ts-unified/commit/4768b66005e97128cb202b8b806482613b335709))
+
 ### [5.2.1](https://github.com/darkobits/ts-unified/compare/v5.2.0...v5.2.1) (2020-08-06)
 
 ## [5.2.0](https://github.com/darkobits/ts-unified/compare/v5.1.4...v5.2.0) (2020-08-01)
