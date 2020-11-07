@@ -92,9 +92,9 @@ config.rules['react/jsx-curly-brace-presence'] = ['error', 'never'];
 // DISABLED: This rule does not have a configuration option that allows for the
 // following:
 //
-// {someValue ?
-//   <div>Value is true!</div> :
-//   <div>Value is false.</div>
+// {someValue
+//   ? <div>Value is true!</div>
+//   : <div>Value is false.</div>
 // }
 config.rules['react/jsx-newline'] = 'off';
 
