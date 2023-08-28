@@ -2,4 +2,4 @@
 
 import { requireBin } from 'lib/utils';
 
-export default requireBin('jest');
+export default requireBin('prettier');

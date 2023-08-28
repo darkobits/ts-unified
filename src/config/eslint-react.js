@@ -7,11 +7,7 @@ const config = {
     jsx: true,
     useJSXTextNode: true
   },
-  plugins: [
-    'react',
-    'react-hooks',
-    'jsx-a11y'
-  ],
+  plugins: ['react', 'react-hooks', 'jsx-a11y'],
   extends: [
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
@@ -29,17 +25,19 @@ const config = {
   overrides: []
 };
 
-
 // ----- [Plugin] react --------------------------------------------------------
 
 // Require button elements to have an explicit "type" attribute.
 config.rules['react/button-has-type'] = ['error'];
 
 // Require that components be defined as arrow functions.
-config.rules['react/function-component-definition'] = ['error', {
-  namedComponents: 'arrow-function',
-  unnamedComponents: 'arrow-function'
-}];
+config.rules['react/function-component-definition'] = [
+  'error',
+  {
+    namedComponents: 'arrow-function',
+    unnamedComponents: 'arrow-function'
+  }
+];
 
 // Prevent usage of array indexes in `key` attributes.
 config.rules['react/no-array-index-key'] = ['error'];
@@ -99,65 +97,90 @@ config.rules['react/jsx-curly-brace-presence'] = ['error', 'never'];
 config.rules['react/jsx-newline'] = 'off';
 
 // Disallow spaces inside of curly braces in JSX attributes and expressions.
-config.rules['react/jsx-curly-spacing'] = ['error', {
-  when: 'never',
-  objectLiterals: 'never'
-}];
+config.rules['react/jsx-curly-spacing'] = [
+  'error',
+  {
+    when: 'never',
+    objectLiterals: 'never'
+  }
+];
 
 // Disallow spaces around equal signs in JSX attributes.
 config.rules['react/jsx-equals-spacing'] = ['error', 'never'];
 
 // Restrict which file extensions may contain JSX.
-config.rules['react/jsx-filename-extension'] = ['error', {
-  extensions: ['.tsx', '.jsx']
-}];
+config.rules['react/jsx-filename-extension'] = [
+  'error',
+  {
+    extensions: ['.tsx', '.jsx']
+  }
+];
 
 // Require that the first JSX property be on a new line if the JSX tag takes
 // up multiple lines and there are multiple properties.
-config.rules['react/jsx-first-prop-new-line'] = ['error', 'multiline-multiprop'];
+config.rules['react/jsx-first-prop-new-line'] = [
+  'error',
+  'multiline-multiprop'
+];
 
 // Enforce shorthand for React fragments (ie: <>...</>).
 config.rules['react/jsx-fragments'] = ['error', 'syntax'];
 
 // Require indentation of 2 spaces in JSX, including attributes and logical
 // expressions.
-config.rules['react/jsx-indent'] = ['error', 2, {
-  checkAttributes: true,
-  indentLogicalExpressions: true
-}];
+config.rules['react/jsx-indent'] = [
+  'error',
+  2,
+  {
+    checkAttributes: true,
+    indentLogicalExpressions: true
+  }
+];
 
 // Enforce an indentation level of 2 spaces for multi-line JSX props relative to
 // their tags.
 config.rules['react/jsx-indent-props'] = ['error', 2];
 
 // Report missing `key` props in iterators/collection literals.
-config.rules['react/jsx-key'] = ['error', {
-  checkFragmentShorthand: true
-}];
+config.rules['react/jsx-key'] = [
+  'error',
+  {
+    checkFragmentShorthand: true
+  }
+];
 
 // Warn on excessive JSX indentation depth.
-config.rules['react/jsx-max-depth'] = ['warn', {
-  max: 16
-}];
+config.rules['react/jsx-max-depth'] = [
+  'warn',
+  {
+    max: 16
+  }
+];
 
 // Limit the maximum number of props on a single line in JSX.
-config.rules['react/jsx-max-props-per-line'] = ['error', {
-  maximum: 4
-}];
+config.rules['react/jsx-max-props-per-line'] = [
+  'error',
+  {
+    maximum: 4
+  }
+];
 
 // Control what kinds of functions can be used in JSX props.
-config.rules['react/jsx-no-bind'] = ['error', {
-  // Allow anonymous arrow functions.
-  allowArrowFunctions: true,
-  // Disallow regular functions.
-  allowFunctions: false,
-  // Disallow .bind().
-  allowBind: false,
-  // Do not exempt vanilla DOM element from this rule.
-  ignoreDOMComponents: false,
-  // Do not exempt refs from this rule.
-  ignoreRefs: false
-}];
+config.rules['react/jsx-no-bind'] = [
+  'error',
+  {
+    // Allow anonymous arrow functions.
+    allowArrowFunctions: true,
+    // Disallow regular functions.
+    allowFunctions: false,
+    // Disallow .bind().
+    allowBind: false,
+    // Do not exempt vanilla DOM element from this rule.
+    ignoreDOMComponents: false,
+    // Do not exempt refs from this rule.
+    ignoreRefs: false
+  }
+];
 
 // Prevent comments from accidentally being inserted as text nodes.
 config.rules['react/jsx-no-comment-textnodes'] = ['error'];
@@ -166,20 +189,28 @@ config.rules['react/jsx-no-comment-textnodes'] = ['error'];
 config.rules['react/jsx-no-duplicate-props'] = ['error'];
 
 // Disallow the usage of `javascript:` URLs.
-config.rules['react/jsx-no-script-url'] = ['error', [{
-  // Include the popular Link component from React Router.
-  name: 'Link',
-  props: ['to']
-}]];
+config.rules['react/jsx-no-script-url'] = [
+  'error',
+  [
+    {
+      // Include the popular Link component from React Router.
+      name: 'Link',
+      props: ['to']
+    }
+  ]
+];
 
 // Disallow a `target="_blank"` attribute without an accompanying
 // `rel="noopener noreferrer"` attribute.
 config.rules['react/jsx-no-target-blank'] = ['error'];
 
 // Disallow undeclared variables in JSX.
-config.rules['react/jsx-no-undef'] = ['error', {
-  allowGlobals: false
-}];
+config.rules['react/jsx-no-undef'] = [
+  'error',
+  {
+    allowGlobals: false
+  }
+];
 
 // Disallow unnecessary JSX fragments.
 config.rules['react/jsx-no-useless-fragment'] = ['error'];
@@ -192,38 +223,46 @@ config.rules['react/jsx-props-no-multi-spaces'] = ['error'];
 
 // Disallow JSX props spreading. This enhances readability of code by being
 // more explicit about what props are received by the component.
-config.rules['react/jsx-props-no-spreading'] = ['error', {
-  // Allow props spreading when the properties being spread are explicitly
-  // enumerated.
-  explicitSpread: 'ignore'
-}];
+config.rules['react/jsx-props-no-spreading'] = [
+  'error',
+  {
+    // Allow props spreading when the properties being spread are explicitly
+    // enumerated.
+    explicitSpread: 'ignore'
+  }
+];
 
 // Validate whitespace in and around the JSX opening and closing brackets.
-config.rules['react/jsx-tag-spacing'] = ['error', {
-  // Disallow spaces after `<` opening tags.
-  afterOpening: 'never',
-  // Disallow spaces before `>` closing tags.
-  beforeClosing: 'never',
-  // Require a space before `/>` self-closing tags.
-  beforeSelfClosing: 'always',
-  // Disallow spaces between `</` or `/>` characters.
-  closingSlash: 'never'
-}];
+config.rules['react/jsx-tag-spacing'] = [
+  'error',
+  {
+    // Disallow spaces after `<` opening tags.
+    afterOpening: 'never',
+    // Disallow spaces before `>` closing tags.
+    beforeClosing: 'never',
+    // Require a space before `/>` self-closing tags.
+    beforeSelfClosing: 'always',
+    // Disallow spaces between `</` or `/>` characters.
+    closingSlash: 'never'
+  }
+];
 
 // Prevent variables used in JSX from being incorrectly marked as unused.
 config.rules['react/jsx-uses-vars'] = ['error'];
 
 // Require parens around multi-line JSX expressions in certain contexts.
-config.rules['react/jsx-wrap-multilines'] = ['error', {
-  declaration: 'parens',
-  assignment: 'parens',
-  return: 'parens',
-  arrow: 'parens',
-  condition: 'ignore',
-  logical: 'ignore',
-  prop: 'ignore'
-}];
-
+config.rules['react/jsx-wrap-multilines'] = [
+  'error',
+  {
+    declaration: 'parens',
+    assignment: 'parens',
+    return: 'parens',
+    arrow: 'parens',
+    condition: 'ignore',
+    logical: 'ignore',
+    prop: 'ignore'
+  }
+];
 
 // ----- [Plugin] react-hooks --------------------------------------------------
 
@@ -241,25 +280,26 @@ config.rules['react/jsx-wrap-multilines'] = ['error', {
 // }];
 config.rules['react-hooks/exhaustive-deps'] = 'off';
 
-
 // ----- [Plugin] jsx-a11y -----------------------------------------------------
 
 // This rule was deprecated in version 6.1.0, but still appears to be in the
 // plugin's 'recommended' rule set.
 config.rules['jsx-a11y/label-has-for'] = 'off';
 
-
 // ----- [Plugin] @typescript/eslint -------------------------------------------
 
 // Configure the indent rule to ignore JSX nodes. The react/jsx-indent rule
 // will enforce indentation for JSX.
-config.rules['@typescript-eslint/indent'] = ['error', 2, {
-  ignoredNodes: ['JSXElement'],
-  // Require an extra 2 spaces of indentation between switch statements and case
-  // statements.
-  SwitchCase: 1
-}];
-
+config.rules['@typescript-eslint/indent'] = [
+  'error',
+  2,
+  {
+    ignoredNodes: ['JSXElement'],
+    // Require an extra 2 spaces of indentation between switch statements and case
+    // statements.
+    SwitchCase: 1
+  }
+];
 
 // ----- [Plugin] unicorn ------------------------------------------------------
 
@@ -267,19 +307,14 @@ config.rules['@typescript-eslint/indent'] = ['error', 2, {
 // `null` value.
 config.rules['unicorn/no-null'] = 'off';
 
-
 // ----- Overrides -------------------------------------------------------------
 
 // Automatically set the environment to 'browser' in .jsx and .tsx files.
 config.overrides.push({
-  files: [
-    '*.jsx',
-    '*.tsx'
-  ],
+  files: ['*.jsx', '*.tsx'],
   env: {
     browser: true
   }
 });
-
 
 export default config;

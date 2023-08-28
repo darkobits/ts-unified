@@ -2,8 +2,7 @@
 // ----- ESLint Rules (TypeScript) ---------------------------------------------
 // -----------------------------------------------------------------------------
 
-import {findTsConfig} from 'lib/utils';
-
+import { findTsConfig } from 'lib/utils';
 
 const config = {
   parser: '@typescript-eslint/parser',
@@ -17,15 +16,13 @@ const config = {
   env: {
     node: true
   },
-  plugins: [
-    '@typescript-eslint',
-    'eslint-plugin-prefer-arrow'
-  ],
+  plugins: ['@typescript-eslint', 'eslint-plugin-prefer-arrow'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:unicorn/recommended'
+    'plugin:unicorn/recommended',
+    'prettier'
   ],
   settings: {
     format: 'codeframe'
@@ -33,7 +30,6 @@ const config = {
   rules: {},
   overrides: []
 };
-
 
 // ----- [Base] Possible Errors ------------------------------------------------
 
@@ -47,24 +43,30 @@ config.rules['no-console'] = ['warn'];
 // or `yield`.
 config.rules['require-atomic-updates'] = ['error'];
 
-
 // ----- [Base] Best Practices -------------------------------------------------
 
 // Enforce return statements in callbacks of array methods.
-config.rules['array-callback-return'] = ['error', {
-  // Allow implicitly returning `undefined` with a return statement
-  // containing no expression.
-  allowImplicit: true
-}];
+config.rules['array-callback-return'] = [
+  'error',
+  {
+    // Allow implicitly returning `undefined` with a return statement
+    // containing no expression.
+    allowImplicit: true
+  }
+];
 
 // Require that the dot in a member expression be on the same line as the
 // property portion.
 config.rules['dot-location'] = ['error', 'property'];
 
 // Require the use of === and !==.
-config.rules['eqeqeq'] = ['error', 'always', {
-  null: 'ignore'
-}];
+config.rules['eqeqeq'] = [
+  'error',
+  'always',
+  {
+    null: 'ignore'
+  }
+];
 
 // Disallow the use of `alert`, `confirm`, and `prompt` in browser contexts.
 config.rules['no-alert'] = ['error'];
@@ -77,9 +79,12 @@ config.rules['no-constructor-return'] = ['error'];
 
 // Disallow `else` and `else if` blocks if the above `if` block contains a
 // return statement.
-config.rules['no-else-return'] = ['error', {
-  allowElseIf: false
-}];
+config.rules['no-else-return'] = [
+  'error',
+  {
+    allowElseIf: false
+  }
+];
 
 // Disallow destructuring statements that do not create variables.
 config.rules['no-empty-pattern'] = ['error'];
@@ -113,7 +118,6 @@ config.rules['no-lone-blocks'] = ['error'];
 // statements.
 config.rules['no-loop-func'] = ['error'];
 
-
 // ----- [Base] Stylistic ------------------------------------------------------
 
 // Require line breaks after opening and before closing array brackets if
@@ -143,9 +147,13 @@ config.rules['comma-dangle'] = ['error', 'never'];
 config.rules['comma-style'] = ['error', 'last'];
 
 // Disallow spaces inside of computed properties in object literals.
-config.rules['computed-property-spacing'] = ['error', 'never', {
-  enforceForClassMembers: true
-}];
+config.rules['computed-property-spacing'] = [
+  'error',
+  'never',
+  {
+    enforceForClassMembers: true
+  }
+];
 
 // Require a newline at the end of files.
 config.rules['eol-last'] = ['error', 'always'];
@@ -154,38 +162,46 @@ config.rules['eol-last'] = ['error', 'always'];
 config.rules['jsx-quotes'] = ['error', 'prefer-double'];
 
 // Warn about long lines.
-config.rules['max-len'] = ['warn', {
-  tabWidth: 2,
-  // Prefer lines of code remain under 128 characters.
-  code: 192,
-  // Prefer comments be wrapped at 80 characters.
-  comments: 80,
-  // Ignore trailing comments, as these can often be ESLint directives.
-  ignoreTrailingComments: true,
-  // Ignore lines that contain URLs
-  ignoreUrls: true,
-  // Ignore lines that contain string literals.
-  ignoreStrings: true
-}];
+config.rules['max-len'] = [
+  'warn',
+  {
+    tabWidth: 2,
+    // Prefer lines of code remain under 128 characters.
+    code: 192,
+    // Prefer comments be wrapped at 80 characters.
+    comments: 80,
+    // Ignore trailing comments, as these can often be ESLint directives.
+    ignoreTrailingComments: true,
+    // Ignore lines that contain URLs
+    ignoreUrls: true,
+    // Ignore lines that contain string literals.
+    ignoreStrings: true
+  }
+];
 
 // Allow up to 2 empty lines.
-config.rules['no-multiple-empty-lines'] = ['error', {
-  max: 2
-}];
+config.rules['no-multiple-empty-lines'] = [
+  'error',
+  {
+    max: 2
+  }
+];
 
 // Require a space after '//' in comments.
 config.rules['spaced-comment'] = ['error', 'always'];
 
 // Enforce consistent spacing around around colons in `case` and `default`
 // clauses in `switch` statements.
-config.rules['switch-colon-spacing'] = ['error', {
-  after: true,
-  before: false
-}];
+config.rules['switch-colon-spacing'] = [
+  'error',
+  {
+    after: true,
+    before: false
+  }
+];
 
 // Disallow spaces between a tag function and its template literal.
 config.rules['template-tag-spacing'] = ['error', 'never'];
-
 
 // ----- [Base] ECMAScript 6 ---------------------------------------------------
 
@@ -193,31 +209,44 @@ config.rules['template-tag-spacing'] = ['error', 'never'];
 config.rules['arrow-body-style'] = 'off';
 
 // Require parens around arrow function arguments only when required.
-config.rules['arrow-parens'] = ['error', 'as-needed', {
-  // Require parens if the function body is surrounded by braces.
-  // requireForBlockBody: true
-}];
+config.rules['arrow-parens'] = [
+  'error',
+  'as-needed',
+  {
+    // Require parens if the function body is surrounded by braces.
+    // requireForBlockBody: true
+  }
+];
 
 // Require a space before and after an arrow function's arrow.
-config.rules['arrow-spacing'] = ['error', {
-  before: true,
-  after: true
-}];
+config.rules['arrow-spacing'] = [
+  'error',
+  {
+    before: true,
+    after: true
+  }
+];
 
 // Disallow arrow functions where they could be confused with comparisons.
-config.rules['no-confusing-arrow'] = ['error', {
-  // Relaxes the rule and allows parens as a valid confusion-preventing
-  // syntax.
-  allowParens: true
-}];
+config.rules['no-confusing-arrow'] = [
+  'error',
+  {
+    // Relaxes the rule and allows parens as a valid confusion-preventing
+    // syntax.
+    allowParens: true
+  }
+];
 
 // Disallow duplicate imports.
 config.rules['no-duplicate-imports'] = ['error'];
 
 // Disallow unnecessary computed property keys in objects and classes.
-config.rules['no-useless-computed-key'] = ['error', {
-  enforceForClassMembers: true
-}];
+config.rules['no-useless-computed-key'] = [
+  'error',
+  {
+    enforceForClassMembers: true
+  }
+];
 
 // Disallow renaming import, export, and destructured assignments to the
 // same name
@@ -241,7 +270,6 @@ config.rules['rest-spread-spacing'] = ['error'];
 // Disallow extraneous spaces inside of template string curly brace pairs.
 config.rules['template-curly-spacing'] = ['error', 'never'];
 
-
 // ----- [Plugin] @typescript/eslint -------------------------------------------
 
 // N.B. For several of these rules, the base ESLint rule _must_ be disabled
@@ -251,10 +279,13 @@ config.rules['template-curly-spacing'] = ['error', 'never'];
 config.rules['@typescript-eslint/adjacent-overload-signatures'] = ['error'];
 
 // Require the generic style for typing arrays.
-config.rules['@typescript-eslint/array-type'] = ['error', {
-  default: 'generic',
-  readonly: 'generic'
-}];
+config.rules['@typescript-eslint/array-type'] = [
+  'error',
+  {
+    default: 'generic',
+    readonly: 'generic'
+  }
+];
 
 // Do not allow await-ing of non-Promise values.
 config.rules['@typescript-eslint/await-thenable'] = ['error'];
@@ -268,17 +299,20 @@ config.rules['@typescript-eslint/ban-ts-ignore'] = 'off';
 
 // Disallow typing values using their runtime constructors, and prefer their
 // primitive counterparts instead.
-config.rules['@typescript-eslint/ban-types'] = ['error', {
-  types: {
-    /* eslint-disable @typescript-eslint/naming-convention */
-    String: 'Use `string` instead.',
-    Number: 'Use `number` instead.',
-    Boolean: 'Use `boolean` instead.',
-    Symbol: 'Use `symbol` instead.',
-    Object: 'Use `object` instead.'
-    /* eslint-enable @typescript-eslint/naming-convention */
+config.rules['@typescript-eslint/ban-types'] = [
+  'error',
+  {
+    types: {
+      /* eslint-disable @typescript-eslint/naming-convention */
+      String: 'Use `string` instead.',
+      Number: 'Use `number` instead.',
+      Boolean: 'Use `boolean` instead.',
+      Symbol: 'Use `symbol` instead.',
+      Object: 'Use `object` instead.'
+      /* eslint-enable @typescript-eslint/naming-convention */
+    }
   }
-}];
+];
 
 // Enforce the usage of 'one-true-brace-style' for braces.
 config.rules['brace-style'] = 'off';
@@ -293,17 +327,23 @@ config.rules['@typescript-eslint/class-literal-property-style'] = 'off';
 
 // Disallow spaces before commas, require spaces after commas.
 config.rules['comma-spacing'] = 'off';
-config.rules['@typescript-eslint/comma-spacing'] = ['error', {
-  before: false,
-  after: true
-}];
+config.rules['@typescript-eslint/comma-spacing'] = [
+  'error',
+  {
+    before: false,
+    after: true
+  }
+];
 
 // Require the 'as' syntax for type assertions and allow casting object
 // literals using this syntax.
-config.rules['@typescript-eslint/consistent-type-assertions'] = ['error', {
-  assertionStyle: 'as',
-  objectLiteralTypeAssertions: 'allow'
-}];
+config.rules['@typescript-eslint/consistent-type-assertions'] = [
+  'error',
+  {
+    assertionStyle: 'as',
+    objectLiteralTypeAssertions: 'allow'
+  }
+];
 
 // Require that optional parameters and parameters with default values are
 // last in a function signature.
@@ -332,50 +372,55 @@ config.rules['@typescript-eslint/func-call-spacing'] = ['error', 'never'];
 
 // Require 2-space indentation.
 config.rules['indent'] = 'off';
-config.rules['@typescript-eslint/indent'] = ['error', 2, {
-  // Require an extra 2 spaces of indentation between switch statements and case
-  // statements.
-  SwitchCase: 1
-}];
+config.rules['@typescript-eslint/indent'] = 'off';
 
 // No strong preference on this rule.
 config.rules['@typescript-eslint/init-declarations'] = 'off';
 
 // Require a space before and after keywords like `for`, `if`, etc.
 config.rules['keyword-spacing'] = 'off';
-config.rules['@typescript-eslint/keyword-spacing'] = ['error', {
-  before: true,
-  after: true
-}];
+config.rules['@typescript-eslint/keyword-spacing'] = [
+  'error',
+  {
+    before: true,
+    after: true
+  }
+];
 
 // Require semi-colons after members in interface declarations.
-config.rules['@typescript-eslint/member-delimiter-style'] = ['error', {
-  multiline: {
-    delimiter: 'semi',
-    requireLast: true
-  },
-  singleline: {
-    delimiter: 'semi',
-    requireLast: false
+config.rules['@typescript-eslint/member-delimiter-style'] = [
+  'error',
+  {
+    multiline: {
+      delimiter: 'semi',
+      requireLast: true
+    },
+    singleline: {
+      delimiter: 'semi',
+      requireLast: false
+    }
   }
-}];
+];
 
 // Enforce member ordering on interfaces and classes.
-config.rules['@typescript-eslint/member-ordering'] = ['error', {
-  default: [
-    // Field order.
-    'private-static-field',
-    'public-static-field',
-    'private-instance-field',
-    'public-instance-field',
+config.rules['@typescript-eslint/member-ordering'] = [
+  'error',
+  {
+    default: [
+      // Field order.
+      'private-static-field',
+      'public-static-field',
+      'private-instance-field',
+      'public-instance-field',
 
-    // Method order.
-    'constructor',
-    'private-instance-method',
-    'public-instance-method',
-    'static-method'
-  ]
-}];
+      // Method order.
+      'constructor',
+      'private-instance-method',
+      'public-instance-method',
+      'static-method'
+    ]
+  }
+];
 
 // Do not enforce a particular method signature style ("property" style or
 // "method" style). While "property" style may allow the compiler to make
@@ -385,36 +430,44 @@ config.rules['@typescript-eslint/member-ordering'] = ['error', {
 config.rules['@typescript-eslint/method-signature-style'] = 'off';
 
 // Enforce naming conventions for various kinds of symbols.
-config.rules['@typescript-eslint/naming-convention'] = ['warn', {
-  // By default, require a value be named using camelCase.
-  selector: 'default',
-  format: ['camelCase']
-}, {
-  // Require variables to be named using camelCase, UPPER_CASE, or PascalCase.
-  selector: 'variable',
-  format: ['camelCase', 'UPPER_CASE', 'PascalCase']
-}, {
-  // Require function expressions to be named using camelCase or PascalCase.
-  selector: 'variable',
-  types: ['function'],
-  format: ['camelCase', 'PascalCase']
-}, {
-  // Require function declarations to be named using camelCase or PascalCase.
-  selector: 'function',
-  format: ['camelCase', 'PascalCase']
-}, {
-  // Require classes, interfaces, type aliases, and type parameters to be named
-  // using PascalCase.
-  selector: ['class', 'interface', 'typeAlias', 'typeParameter'],
-  format: ['PascalCase']
-}, {
-  // Do not enforce any naming conventions for object properties because we
-  // often need to use objects whose shape is defined by a third-party API or
-  // schema that we have no control over.
-  selector: 'property',
-  // eslint-disable-next-line unicorn/no-null
-  format: null
-}];
+config.rules['@typescript-eslint/naming-convention'] = [
+  'warn',
+  {
+    // By default, require a value be named using camelCase.
+    selector: 'default',
+    format: ['camelCase']
+  },
+  {
+    // Require variables to be named using camelCase, UPPER_CASE, or PascalCase.
+    selector: 'variable',
+    format: ['camelCase', 'UPPER_CASE', 'PascalCase']
+  },
+  {
+    // Require function expressions to be named using camelCase or PascalCase.
+    selector: 'variable',
+    types: ['function'],
+    format: ['camelCase', 'PascalCase']
+  },
+  {
+    // Require function declarations to be named using camelCase or PascalCase.
+    selector: 'function',
+    format: ['camelCase', 'PascalCase']
+  },
+  {
+    // Require classes, interfaces, type aliases, and type parameters to be named
+    // using PascalCase.
+    selector: ['class', 'interface', 'typeAlias', 'typeParameter'],
+    format: ['PascalCase']
+  },
+  {
+    // Do not enforce any naming conventions for object properties because we
+    // often need to use objects whose shape is defined by a third-party API or
+    // schema that we have no control over.
+    selector: 'property',
+    // eslint-disable-next-line unicorn/no-null
+    format: null
+  }
+];
 
 // Disallow the use of `new Array()`.
 config.rules['no-array-constructor'] = 'off';
@@ -447,10 +500,14 @@ config.rules['@typescript-eslint/no-extra-non-null-assertion'] = ['error'];
 
 // Disallow unnecessary parentheses, except around JSX expressions.
 config.rules['no-extra-parens'] = 'off';
-config.rules['@typescript-eslint/no-extra-parens'] = ['error', 'all', {
-  ignoreJSX: 'all',
-  enforceForArrowConditionals: false
-}];
+config.rules['@typescript-eslint/no-extra-parens'] = [
+  'error',
+  'all',
+  {
+    ignoreJSX: 'all',
+    enforceForArrowConditionals: false
+  }
+];
 
 // Disallow unnecessary semicolons.
 config.rules['no-extra-semi'] = 'off';
@@ -460,11 +517,14 @@ config.rules['@typescript-eslint/no-extra-semi'] = ['error'];
 config.rules['@typescript-eslint/no-extraneous-class'] = ['error'];
 
 // Require Promise-like values to be handled appropriately.
-config.rules['@typescript-eslint/no-floating-promises'] = ['error', {
-  // Exempt statements that use the `void` operator. This can be a good way
-  // to explicitly mark a promise as intentionally not awaited.
-  ignoreVoid: true
-}];
+config.rules['@typescript-eslint/no-floating-promises'] = [
+  'error',
+  {
+    // Exempt statements that use the `void` operator. This can be a good way
+    // to explicitly mark a promise as intentionally not awaited.
+    ignoreVoid: true
+  }
+];
 
 // Disallow iterating over an array with a for-in loop, prefer for-of loops.
 config.rules['@typescript-eslint/no-for-in-array'] = ['error'];
@@ -492,15 +552,20 @@ config.rules['@typescript-eslint/no-misused-new'] = ['error'];
 config.rules['@typescript-eslint/no-misused-promises'] = ['error'];
 
 // Disallow the use of custom TypeScript modules and namespaces.
-config.rules['@typescript-eslint/no-namespace'] = ['error', {
-  // Exempt .d.ts files; it is often necessary in React projects to declare
-  // custom "modules" for non-code file types (ie: images) to avoid TypeScript
-  // errors when they are imported.
-  allowDefinitionFiles: true
-}];
+config.rules['@typescript-eslint/no-namespace'] = [
+  'error',
+  {
+    // Exempt .d.ts files; it is often necessary in React projects to declare
+    // custom "modules" for non-code file types (ie: images) to avoid TypeScript
+    // errors when they are imported.
+    allowDefinitionFiles: true
+  }
+];
 
 // Disallow using a non-null assertion after an optional chain expression.
-config.rules['@typescript-eslint/no-non-null-asserted-optional-chain'] = ['error'];
+config.rules['@typescript-eslint/no-non-null-asserted-optional-chain'] = [
+  'error'
+];
 
 // Disallows non-null assertions using the `!` postfix operator.
 config.rules['@typescript-eslint/no-non-null-assertion'] = ['error'];
@@ -515,7 +580,9 @@ config.rules['@typescript-eslint/no-throw-literal'] = ['error'];
 config.rules['@typescript-eslint/no-type-alias'] = 'off';
 
 // Disallow unnecessary equality comparisons against boolean literals.
-config.rules['@typescript-eslint/no-unnecessary-boolean-literal-compare'] = ['error'];
+config.rules['@typescript-eslint/no-unnecessary-boolean-literal-compare'] = [
+  'error'
+];
 
 // Prevents conditionals where the type is always truthy or always falsy.
 //
@@ -623,10 +690,13 @@ config.rules['@typescript-eslint/prefer-string-starts-ends-with'] = ['error'];
 config.rules['@typescript-eslint/prefer-ts-expect-error'] = 'off';
 
 // Requires any function or method that returns a Promise to be marked `async`.
-config.rules['@typescript-eslint/promise-function-async'] = ['error', {
-  // Additional types that should be considered as Promises.
-  allowedPromiseNames: ['PromiseLike', 'Thenable']
-}];
+config.rules['@typescript-eslint/promise-function-async'] = [
+  'error',
+  {
+    // Additional types that should be considered as Promises.
+    allowedPromiseNames: ['PromiseLike', 'Thenable']
+  }
+];
 
 // Enforce the consistent use of either backticks, double, or single quotes.
 config.rules['quotes'] = 'off';
@@ -644,12 +714,15 @@ config.rules['@typescript-eslint/require-await'] = ['warn'];
 config.rules['@typescript-eslint/restrict-plus-operands'] = ['error'];
 
 // Enforce the types allowed in template literal expressions.
-config.rules['@typescript-eslint/restrict-template-expressions'] = ['error', {
-  allowNumber: true,
-  allowBoolean: true,
-  allowAny: true,
-  allowNullable: true
-}];
+config.rules['@typescript-eslint/restrict-template-expressions'] = [
+  'error',
+  {
+    allowNumber: true,
+    allowBoolean: true,
+    allowAny: true,
+    allowNullish: true
+  }
+];
 
 // Enforces await-ing of Promise-like values before returning them. This allows
 // for better stack traces if the promise rejects.
@@ -661,11 +734,14 @@ config.rules['@typescript-eslint/semi'] = ['error', 'always'];
 
 // Enforce consistent spacing before function parenthesis.
 config.rules['space-before-function-paren'] = 'off';
-config.rules['@typescript-eslint/space-before-function-paren'] = ['error', {
-  named: 'never',
-  anonymous: 'never',
-  asyncArrow: 'always'
-}];
+config.rules['@typescript-eslint/space-before-function-paren'] = [
+  'error',
+  {
+    named: 'never',
+    anonymous: 'never',
+    asyncArrow: 'always'
+  }
+];
 
 // Allow type coercion in boolean expressions.
 config.rules['@typescript-eslint/strict-boolean-expressions'] = 'off';
@@ -674,23 +750,29 @@ config.rules['@typescript-eslint/strict-boolean-expressions'] = 'off';
 config.rules['@typescript-eslint/switch-exhaustiveness-check'] = 'off';
 
 // Prefer ES6-style import declarations over triple-slash references.
-config.rules['@typescript-eslint/triple-slash-reference'] = ['error', {
-  path: 'never',
-  types: 'never',
-  lib: 'never'
-}];
+config.rules['@typescript-eslint/triple-slash-reference'] = [
+  'error',
+  {
+    path: 'never',
+    types: 'never',
+    lib: 'never'
+  }
+];
 
 // Enforce consistent spacing around type annotations.
-config.rules['@typescript-eslint/type-annotation-spacing'] = ['error', {
-  before: false,
-  after: true,
-  overrides: {
-    arrow: {
-      before: true,
-      after: true
+config.rules['@typescript-eslint/type-annotation-spacing'] = [
+  'error',
+  {
+    before: false,
+    after: true,
+    overrides: {
+      arrow: {
+        before: true,
+        after: true
+      }
     }
   }
-}];
+];
 
 // Do not require explicit type definitions. Prefer using TypeScript in strict
 // mode and leveraging type inference instead.
@@ -704,13 +786,15 @@ config.rules['@typescript-eslint/unbound-method'] = ['error'];
 // optional/rest parameter.
 config.rules['@typescript-eslint/unified-signatures'] = ['error'];
 
-
 // ----- [Plugin] unicorn ------------------------------------------------------
 
 // Require consistent naming of errors in catch blocks.
-config.rules['unicorn/catch-error-name'] = ['error', {
-  name: 'err'
-}];
+config.rules['unicorn/catch-error-name'] = [
+  'error',
+  {
+    name: 'err'
+  }
+];
 
 // DISABLED: This rule is disabled because it is often necessary to define
 // functions inside React.useEffect factories to ensure that variables bound
@@ -718,12 +802,15 @@ config.rules['unicorn/catch-error-name'] = ['error', {
 config.rules['unicorn/consistent-function-scoping'] = 'off';
 
 // Allow file names in kebab-case and PascalCase.
-config.rules['unicorn/filename-case'] = ['error', {
-  cases: {
-    kebabCase: true,
-    pascalCase: true
+config.rules['unicorn/filename-case'] = [
+  'error',
+  {
+    cases: {
+      kebabCase: true,
+      pascalCase: true
+    }
   }
-}];
+];
 
 // Allow function references to be passed to iterators.
 config.rules['unicorn/no-fn-reference-in-iterator'] = 'off';
@@ -731,21 +818,22 @@ config.rules['unicorn/no-fn-reference-in-iterator'] = 'off';
 // Don't enforce 'more descriptive' variable names.
 config.rules['unicorn/prevent-abbreviations'] = 'off';
 
-
 // ----- [Plugin] prefer-arrow -------------------------------------------------
 
 // Prefer the use of arrow functions in certain contexts.
-config.rules['prefer-arrow/prefer-arrow-functions'] = ['error', {
-  // Exempt top-level function declarations.
-  allowStandaloneDeclarations: true,
-  // Functions defined as class instance fields will be converted to arrow
-  // functions when doing so would not alter or break their behavior.
-  classPropertiesAllowed: true,
-  // Functions assigned to a prototype will be converted to arrow
-  // functions when doing so would not alter or break their behavior.
-  disallowPrototype: true
-}];
-
+config.rules['prefer-arrow/prefer-arrow-functions'] = [
+  'error',
+  {
+    // Exempt top-level function declarations.
+    allowStandaloneDeclarations: true,
+    // Functions defined as class instance fields will be converted to arrow
+    // functions when doing so would not alter or break their behavior.
+    classPropertiesAllowed: true,
+    // Functions assigned to a prototype will be converted to arrow
+    // functions when doing so would not alter or break their behavior.
+    disallowPrototype: true
+  }
+];
 
 // ----- Overrides -------------------------------------------------------------
 
@@ -753,10 +841,7 @@ config.rules['prefer-arrow/prefer-arrow-functions'] = ['error', {
  * Test files.
  */
 config.overrides.push({
-  files: [
-    '*.test.*',
-    '*.spec.*'
-  ],
+  files: ['*.test.*', '*.spec.*'],
   rules: {
     // Do not require that async functions utilize the await keyword. This
     // allows us to easily mock async functions with a mock implementation that
@@ -769,36 +854,38 @@ config.overrides.push({
   }
 });
 
-
 /**
  * Disable all @typescript-eslint rules for JavaScript files.
  */
-const javaScriptRules = Object.entries(config.rules).reduce((rules, [rule, ruleConfig]) => { // eslint-disable-line unicorn/no-reduce
-  if (rule.startsWith('@typescript-eslint/')) {
-    rules[rule] = 'off';
+const javaScriptRules = Object.entries(config.rules).reduce(
+  (rules, [rule, ruleConfig]) => {
+    // eslint-disable-line unicorn/no-reduce
+    if (rule.startsWith('@typescript-eslint/')) {
+      rules[rule] = 'off';
 
-    // Compute the name of the non-TypeScript variant of the rule by stripping
-    // the prefix. This relies on the fact that @typescript-eslint rules always
-    // use the same rule name as their non-TypeScript variant.
-    const jsRuleName = rule.replace('@typescript-eslint/', '');
+      // Compute the name of the non-TypeScript variant of the rule by stripping
+      // the prefix. This relies on the fact that @typescript-eslint rules always
+      // use the same rule name as their non-TypeScript variant.
+      const jsRuleName = rule.replace('@typescript-eslint/', '');
 
-    // If we have explicitly disabled the non-TypeScript variant of the rule,
-    // re-enable it using the same configuration we used for the TypeScript
-    // variant. This assumes that the schema for the rules is the same. This may
-    // cause failures in the future if the schemas do not match.
-    if (config.rules[jsRuleName] === 'off') {
-      rules[jsRuleName] = ruleConfig;
+      // If we have explicitly disabled the non-TypeScript variant of the rule,
+      // re-enable it using the same configuration we used for the TypeScript
+      // variant. This assumes that the schema for the rules is the same. This may
+      // cause failures in the future if the schemas do not match.
+      if (config.rules[jsRuleName] === 'off') {
+        rules[jsRuleName] = ruleConfig;
+      }
     }
-  }
 
-  return rules;
-}, {});
+    return rules;
+  },
+  {}
+);
 
 config.overrides.push({
   files: ['*.js'],
   parser: 'babel-eslint',
   rules: javaScriptRules
 });
-
 
 export default config;
