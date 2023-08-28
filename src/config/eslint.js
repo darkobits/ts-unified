@@ -211,7 +211,7 @@ config.rules['arrow-body-style'] = 'off';
 // Require parens around arrow function arguments only when required.
 config.rules['arrow-parens'] = [
   'error',
-  'as-needed',
+  'always',
   {
     // Require parens if the function body is surrounded by braces.
     // requireForBlockBody: true
@@ -454,8 +454,8 @@ config.rules['@typescript-eslint/naming-convention'] = [
     format: ['camelCase', 'PascalCase']
   },
   {
-    // Require classes, interfaces, type aliases, and type parameters to be named
-    // using PascalCase.
+    // Require classes, interfaces, type aliases, and type parameters
+    // to be named using PascalCase.
     selector: ['class', 'interface', 'typeAlias', 'typeParameter'],
     format: ['PascalCase']
   },
@@ -700,7 +700,11 @@ config.rules['@typescript-eslint/promise-function-async'] = [
 
 // Enforce the consistent use of either backticks, double, or single quotes.
 config.rules['quotes'] = 'off';
-config.rules['@typescript-eslint/quotes'] = ['error', 'single'];
+config.rules['@typescript-eslint/quotes'] = [
+  'error',
+  'single',
+  { avoidEscape: true }
+];
 
 // Require Array#sort calls to always provide a comparator function.
 config.rules['@typescript-eslint/require-array-sort-compare'] = ['error'];
@@ -857,21 +861,22 @@ config.overrides.push({
 /**
  * Disable all @typescript-eslint rules for JavaScript files.
  */
+// eslint-disable-next-line unicorn/no-reduce
 const javaScriptRules = Object.entries(config.rules).reduce(
   (rules, [rule, ruleConfig]) => {
-    // eslint-disable-line unicorn/no-reduce
+    // eslint-disable-next-line unicorn/no-reduce
     if (rule.startsWith('@typescript-eslint/')) {
       rules[rule] = 'off';
 
       // Compute the name of the non-TypeScript variant of the rule by stripping
-      // the prefix. This relies on the fact that @typescript-eslint rules always
-      // use the same rule name as their non-TypeScript variant.
+      // the prefix. This relies on the fact that @typescript-eslint rules
+      // always use the same rule name as their non-TypeScript variant.
       const jsRuleName = rule.replace('@typescript-eslint/', '');
 
       // If we have explicitly disabled the non-TypeScript variant of the rule,
       // re-enable it using the same configuration we used for the TypeScript
-      // variant. This assumes that the schema for the rules is the same. This may
-      // cause failures in the future if the schemas do not match.
+      // variant. This assumes that the schema for the rules is the same. This
+      // may cause failures in the future if the schemas do not match.
       if (config.rules[jsRuleName] === 'off') {
         rules[jsRuleName] = ruleConfig;
       }

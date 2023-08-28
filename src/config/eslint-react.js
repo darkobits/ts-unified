@@ -295,8 +295,8 @@ config.rules['@typescript-eslint/indent'] = [
   2,
   {
     ignoredNodes: ['JSXElement'],
-    // Require an extra 2 spaces of indentation between switch statements and case
-    // statements.
+    // Require an extra 2 spaces of indentation between switch statements
+    // and case statements.
     SwitchCase: 1
   }
 ];
