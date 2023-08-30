@@ -15,7 +15,7 @@ const prefixBin = (binName) => {
   if (
     module.parent &&
     module.parent.id ===
-    path.resolve(__dirname, '..', '..', 'package-scripts.js')
+      path.resolve(__dirname, '..', '..', 'package-scripts.js')
   ) {
     return binName;
   }
