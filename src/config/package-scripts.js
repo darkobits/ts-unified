@@ -15,7 +15,7 @@ const prefixBin = (binName) => {
   if (
     module.parent &&
     module.parent.id ===
-      path.resolve(__dirname, '..', '..', 'package-scripts.js')
+    path.resolve(__dirname, '..', '..', 'package-scripts.js')
   ) {
     return binName;
   }
@@ -131,6 +131,19 @@ export default (userArgument) => {
           // If there is a user-defined script named 'postbuild', run it.
           userScripts?.scripts?.postbuild ? 'nps postbuild' : undefined
         ].filter(Boolean)
+      )
+    },
+    build: {
+      descript: 'Only Build the Project',
+      script: npsUtils.series(
+        ...[
+          npsUtils.concurrent({
+            babel,
+            tsc: `${ttsc} --emitDeclarationOnly`
+          }),
+          postBuild,
+          userScripts?.scripts?.postBuild ? 'nps postbuild' : undefined
+        ]
       )
     },
     watch: {
